@@ -6,36 +6,44 @@
 </head>
 
 <body>
-  <div class="whole-card">
-    <div class="header">
-      <h1> Create your account </h1>
-      <p> already have an account ? <a href="login.html"> LogIn  Instead </a> </p>
+  <div class="pageContainer">
+    <div class="FormSection">
+      <div class="whole-card">
+        <div class="header">
+          <h1> Create your account </h1>
+          <p> already have an account ? <a href="login.html"> LogIn Instead </a> </p>
+        </div>
+        <hr class="divider">
+        <form action="your-success-page.html" method="GET">
+          <div>
+            <label> Full name </label>
+            <input type="text" class="input_fields" placeholder="Aman Tarakhan">
+          </div>
+          <div>
+            <label> Email </label>
+            <input type="email" class="input_fields" placeholder="you@email.com">
+          </div>
+          <div>
+            <label> Password </label>
+            <input type="password" class="input_fields" placeholder="********">
+          </div>
+          <div>
+            <label> confirm your password </label>
+            <input type="password" class="input_fields" placeholder="********">
+          </div>
+          <div>
+            <button class="button" type="submit"> Create Account </button>
+          </div>
+        </form>
+        <hr class="divider">
+        <div>
+          <p class="notes"> By signing up, you agree to our Terms of Service and Privacy Policy. </p>
+        </div>
+      </div>
     </div>
-    <hr class="divider">
-    <form action="your-success-page.html" method="GET">
-      <div>
-        <label> Full name </label>
-        <input type="text" class="input_fields">
-      </div>
-      <div>
-        <label> Email </label>
-        <input type="email" class="input_fields">
-      </div>
-      <div>
-        <label> Password </label>
-        <input type="password" class="input_fields">
-      </div>
-      <div>
-        <label> confirm your password </label>
-        <input type="password" class="input_fields">
-      </div>
-      <div>
-        <button class="button" type="submit"> Create Account </button>
-      </div>
-    </form>
-    <hr class="divider">
-    <div>
-      <p class="notes"> By signing up, you agree to our Terms of Service and Privacy Policy. </p>
+    <div class="imageSection">
+      <img src="image2.svg" >
     </div>
+
   </div>
 </body>

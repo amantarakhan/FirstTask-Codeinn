@@ -4,106 +4,117 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 body {
-  margin:0;
-  
-  display: flex;
-  justify-content: center; 
-  align-items: center;     
-  min-height: 100vh;       
-  background-repeat: no-repeat ;
-  background-image: url("background.jpg"); 
+  margin: 0;
+  padding: 0%;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-color: aliceblue;
   background-size: cover;
-
 }
+
 
 .whole-card {
   width: 350px;
   padding: 2rem;
   background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px); /* this adds the glass effect */ 
+  backdrop-filter: blur(10px);
+  /* this adds the glass effect */
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  border : 1px solid #c0395c
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #c0395c
 }
 
 .divider {
   border: none;
-  border-top: 1px solid grey; 
-  margin: 20px 0; /* Space above and below */
+  border-top: 1px solid grey;
+  margin: 20px 0;
+  /* Space above and below */
   width: 100%;
 }
 
 .header {
-  font-family: 'Plus Jakarta Sans', sans-serif; 
-  color: black ; 
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: black;
 }
 
-.header P { 
-color: #7A4F57;  
+.header P {
+  color: #7A4F57;
 }
 
-.header p a { 
-color: #C0395C;   
+.header p a {
+  color: #C0395C;
 }
 
-label { 
-  display: block;      /* Ensures the label is on its own line */
-  margin-bottom: 8px;  /* This creates that "breathable" space */
-  font-weight: 600;    /* Optional: make it pop a bit more */
-  font-size: 0.75rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;   
+label {
+  display: block;
+  /* Ensures the label is on its own line */
+  margin-bottom: 5px;
+  /* This creates that "breathable" space */
   font-weight: 600;
-  color: #4A2D35; 
+  /* Optional: make it pop a bit more */
+  font-size: 0.75rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  color: #4A2D35;
   text-transform: uppercase;
 }
 
- 
+
 .input_fields {
   width: 85%;
-  margin-bottom: 20px;
-  padding: 13px 44px 13px 16px; 
+  margin-bottom: 10px;
+  padding: 13px 44px 13px 16px;
   background: rgba(255, 255, 255, 0.3);
-  border: 1.5px solid rgba(255, 255, 255, 0.5); ;
-  border-radius: 12px ;
+  border: 1.5px solid #8E2A44;
+  border-radius: 12px;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.95rem;
-  color: #2D1B1E;;
+  color: #2D1B1E;
+  ;
   outline: none;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* this is for the smooth transition */ 
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  /* this is for the smooth transition */
 }
 
-.pass_reminder { 
-  display: block;    
-  text-align: right;   /* Pushes the text inside that width to the right */
-  
+.pass_reminder {
+  display: block;
+  text-align: right;
+  /* Pushes the text inside that width to the right */
+
   font-size: 0.82rem;
   font-weight: 500;
   color: #C0395C;
   text-decoration: none;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  
+
   margin-top: -8px;
   margin-bottom: 15px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .pass_reminder:hover {
-  color: #8E2A44; /* Darker pink to show it's active */
-  text-decoration: underline; /* Standard web hint that this is a link */
-  opacity: 0.8; /* Slight fade for a "glassy" feel */
-} 
+  color: #8E2A44;
+  /* Darker pink to show it's active */
+  text-decoration: underline;
+  /* Standard web hint that this is a link */
+  opacity: 0.8;
+  /* Slight fade for a "glassy" feel */
+}
 
 
 .button {
   width: 95%;
   padding: 14px;
 
-  background: linear-gradient(135deg, #E8527A 0%, #F4829A 50%, #C0395C 100%); /* not a static color a linear gradiant */ 
+  background: linear-gradient(135deg, #E8527A 0%, #F4829A 50%, #C0395C 100%);
+  /* not a static color a linear gradiant */
   background-size: 200% auto;
-  background-position: left center; 
-  color: #fff; /* color of text inside the button */
+  background-position: left center;
+  color: #fff;
+  /* color of text inside the button */
   border: none;
-  border-radius: 12px; ;
+  border-radius: 12px;
+  ;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
@@ -111,21 +122,115 @@ label {
   /* transition covers color slide AND the lift + glow */
   transition: background-position 0.4s ease, transform 0.25s ease, box-shadow 0.25s ease;
 
-  box-shadow: 0 4px 20px rgba(232, 82, 122, 0.4); 
-  margin-top: 4px; 
+  box-shadow: 0 4px 20px rgba(232, 82, 122, 0.4);
+  margin-top: 4px;
 
 }
 
 .button:hover {
-  background-color: #A32F4E; 
-  transform: translateY(-2px); /* Lifts the button up slightly */
-  box-shadow: 0 5px 15px rgba(192, 57, 92, 0.3); /* Adds a soft pink glow */
+  background-color: #A32F4E;
+  transform: translateY(-2px);
+  /* Lifts the button up slightly */
+  box-shadow: 0 5px 15px rgba(192, 57, 92, 0.3);
+  /* Adds a soft pink glow */
   cursor: pointer;
 }
 
 
 .notes {
-  color :  #7A4F57; 
-  font-family: 'Plus Jakarta Sans', sans-serif;    ;
+  color: #7A4F57;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: small;
+
+}
+
+/* the new classes to handle the image in the right and the form in the left */
+
+.pageContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  /* Full screen height */
+  width: 100%;
+  animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  /* this line that holdes the animation*/
+}
+
+
+.FormSection {
+  min-width: 400px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  /* Centers the card horizontally WITHIN the left half */
+  align-items: center;
+  /* Centers the card vertically */
+}
+
+.imageSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: justify-end;
+  overflow: visible;
+}
+
+.imageSection img {
+  width: 95%;
+  max-width: 100%;
+  max-height: 80vh;
+  height: auto;
+  object-fit: contain;
+}
+
+
+/* ---------------- the animation ------------- */
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* then i have to add it as a animation attribute for the div the holds all the page */
+}
+
+
+/* ------------------ to make it rersposive -----------------*/ 
+
+@media (max-width: 768px)
+/* this is like a IF statement (if the screen width is 768px or less -> switch to the mobile (the code in the curly {} ) ) */
+  {
+  .page-container
+
+  /* changing the layout (row->col) */
+    {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .imageSection {
+    /* rmove the image for better UX */
+    display: none;
+  }
+
+  .FormSection {
+    width: 100%;
+    /*cover all screen cuz there is no image */
+    padding: 20px;
+  }
+
+  .whole-card {
+    width: 90%;
+    /* a liitle bit smaller that the screen width */
+    max-width: 400%;
+    /* for tablets */
+  }
+
+
 
 }
