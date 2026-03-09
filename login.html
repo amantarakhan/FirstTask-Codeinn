@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus — Log In</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Full-viewport flex container — centers the card on screen -->
+  <div class="page-wrapper">
+
+    <!-- Frosted glass card -->
+    <div class="card">
+
+      <!-- Page title + link to signup page -->
+      <div class="card-header">
+        <h1>Welcome back</h1>
+        <p>Don't have an account? <a href="signIn.html">Create one</a></p>
+      </div>
+
+      <!-- Thin decorative line between header and form -->
+      <div class="divider"></div>
+
+      <!-- action="#" keeps us on the page (no server yet) | method="post" hides data from the URL -->
+      <form class="auth-form" action="#" method="post">
+
+        <!-- Email field -->
+        <!-- for="login-email" links this label to the input with id="login-email" -->
+        <!-- clicking the label will focus the input — better usability -->
+        <div class="field-group">
+          <label class="field-label" for="login-email">Email <span class="required">*</span></label>
+          <!-- position:relative on this wrapper lets the icon sit inside the input on the right -->
+          <div class="field-input-wrap">
+            <input type="email" id="login-email" name="email" placeholder="name@example.com" autocomplete="email" />
+            <!-- Envelope icon — pointer-events:none so clicks pass through to the input -->
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="4" width="20" height="16" rx="3"/>
+                <polyline points="2,4 12,13 22,4"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Password field -->
+        <!-- type="password" masks characters as dots -->
+        <!-- autocomplete="current-password" lets the browser offer saved passwords -->
+        <div class="field-group">
+          <label class="field-label" for="login-password">Password <span class="required">*</span></label>
+          <div class="field-input-wrap">
+            <input type="password" id="login-password" name="password" placeholder="Enter your password" autocomplete="current-password" />
+            <!-- Lock icon -->
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- justify-content:flex-end in CSS pushes this link to the right side -->
+        <div class="forgot-row">
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <!-- type="submit" sends the form when clicked -->
+        <button type="submit" class="btn-submit">Log In</button>
+
+      </form>
+
+      <!-- Legal note at the bottom — has a top border to separate it from the form -->
+      <p class="terms-note">
+        By continuing, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>.
+      </p>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

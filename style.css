@@ -1,0 +1,345 @@
+/* style.css — shared between login.html and signIn.html */
+
+/* Google Fonts — Plus Jakarta Sans (all text) */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+
+/* ── Variables ──────────────────────────────────────────────── */
+:root {
+  --accent:        #E8527A;
+  --accent-hover:  #C0395C;
+  --accent-glow:   rgba(232, 82, 122, 0.4);
+
+  --text-primary:   #2D1B1E;
+  --text-secondary: #7A4F57;
+  --text-muted:     #B08990;
+  --text-label:     #4A2D35;
+
+  --input-border:  rgba(255, 255, 255, 0.5);
+  --input-focus:   #E8527A;
+  --input-bg:      rgba(255, 255, 255, 0.3);
+
+  /* card is more opaque so it reads clearly against the background */
+  --card-bg:       rgba(255, 255, 255, 0.45);
+  --card-blur:     18px;
+  --card-border:   rgba(255, 255, 255, 0.65);
+  --card-shadow:   0 24px 64px rgba(180, 60, 90, 0.2), 0 4px 16px rgba(0, 0, 0, 0.07);
+
+  --link-color:    #C0395C;
+
+  --radius-card:   24px;
+  --radius-input:  12px;
+  --radius-btn:    12px;
+
+  --transition:    all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ── Body ───────────────────────────────────────────────────── */
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+
+  /* background.jpg fills the full viewport */
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* stays put when the page scrolls */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ── Page Wrapper ───────────────────────────────────────────── */
+/* Full-viewport flex container — centers the card */
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 60px 16px;
+}
+
+
+/* ── Card ───────────────────────────────────────────────────── */
+/*
+  Frosted glass effect:
+    - background is semi-transparent white
+    - backdrop-filter blurs whatever is behind the card
+    - border adds a thin bright "glass edge"
+*/
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(var(--card-blur));
+  -webkit-backdrop-filter: blur(var(--card-blur)); /* Safari */
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  width: 100%;
+  max-width: 440px;
+  padding: 48px 44px;
+  animation: cardReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Card slides up and fades in on page load */
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+
+/* ── Card Header ────────────────────────────────────────────── */
+.card-header {
+  margin-bottom: 28px;
+}
+
+.card-header h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.card-header p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.card-header p a {
+  color: var(--link-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.card-header p a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+
+/* ── Divider ────────────────────────────────────────────────── */
+/* Fades out at both ends so it doesn't look like a hard line */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+  margin-bottom: 28px;
+}
+
+
+/* ── Form ───────────────────────────────────────────────────── */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* ── Field Group ────────────────────────────────────────────── */
+/* Each group = label + input wrapped together */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fieldFadeIn 0.5s ease both;
+}
+
+/* Stagger each field's entrance slightly */
+.field-group:nth-child(1) { animation-delay: 0.10s; }
+.field-group:nth-child(2) { animation-delay: 0.15s; }
+.field-group:nth-child(3) { animation-delay: 0.20s; }
+.field-group:nth-child(4) { animation-delay: 0.25s; }
+.field-group:nth-child(5) { animation-delay: 0.30s; }
+
+@keyframes fieldFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.field-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.field-label .required {
+  color: var(--accent);
+  margin-left: 2px;
+}
+
+/* Relative wrapper so the icon can sit inside the input on the right */
+.field-input-wrap {
+  position: relative;
+}
+
+.field-input-wrap input {
+  width: 100%;
+  padding: 13px 44px 13px 16px; /* right padding keeps text clear of the icon */
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--radius-input);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: var(--transition);
+}
+
+.field-input-wrap input::placeholder {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* Focus: accent border + subtle pink glow ring */
+.field-input-wrap input:focus {
+  border-color: var(--input-focus);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 4px rgba(232, 82, 122, 0.12);
+}
+
+.field-input-wrap input:hover:not(:focus) {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Icon sits on the right side, vertically centered, non-clickable */
+.input-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* ── Forgot Password ────────────────────────────────────────── */
+.forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -8px;
+}
+
+.forgot-link {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--link-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.forgot-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+
+/* ── Submit Button ──────────────────────────────────────────── */
+/*
+  background-size: 200% makes the gradient twice as wide as the button.
+  On hover, background-position shifts from left to right — this
+  "slides" the gradient and changes the color smoothly without
+  an instant jump. The lift and glow are kept from before.
+*/
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+
+  background: linear-gradient(135deg, var(--accent) 0%, #F4829A 50%, var(--accent-hover) 100%);
+  background-size: 200% auto;
+  background-position: left center; /* default: shows the coral/light side */
+
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+
+  /* transition covers color slide AND the lift + glow */
+  transition: background-position 0.4s ease, transform 0.25s ease, box-shadow 0.25s ease;
+
+  box-shadow: 0 4px 20px var(--accent-glow);
+  margin-top: 4px;
+}
+
+/* Hover: slide gradient right (reveals darker rose), lift up, deepen glow */
+.btn-submit:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px var(--accent-glow);
+}
+
+/* Click: snap back down */
+.btn-submit:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+
+/* ── Password Strength Bars (signup only) ───────────────────── */
+.strength-dots {
+  display: flex;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+/* Four equal bars — JS would color these based on password strength */
+.strength-dots span {
+  height: 3px;
+  flex: 1;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  transition: var(--transition);
+}
+
+
+/* ── Terms Note ─────────────────────────────────────────────── */
+.terms-note {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-align: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .card { padding: 36px 24px; }
+  .card-header h1 { font-size: 1.55rem; }
+}
