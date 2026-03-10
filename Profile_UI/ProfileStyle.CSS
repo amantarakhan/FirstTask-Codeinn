@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+/* the font that i will be using */
+
+body {
+    margin: 0;
+    padding: 0%;
+    background-color: aliceblue;
+    background-size: cover;
+}
+
+.cardContainer {
+    /* here the flex items will be the card itself */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Horizantal centering */
+    align-items: center;
+    /* Vertical centering */
+    height: 100vh;
+
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+}
+
+.card {
+    /* here the flex items will be the actual card items */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* main axis which is vertical if we use the flexBox as a column  العكس صحيح */
+    align-items: center;
+    /* cress axis which is horizantal if we use the flexBox as a column  والعكس صحيح X*/
+
+    width: 400px;
+    height: fit-content;
+    backdrop-filter: blur(10px);
+    background-color: #F296B2CC;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+
+}
+
+.porilePic {
+    display: flex;
+    /* i wont use the flex-direction attribute - defult value (ROW) */
+    justify-content: center;
+    /* cuz here its a row this will handle the main axis which is horizantal */
+    align-items: center;
+    /* this will handle the cross axis which is vertical */
+
+    border: 2px solid #333;
+    border-radius: 50%;
+
+    overflow: hidden;
+    /* this to make it under */
+
+}
+
+.porilePic img {
+    object-fit: cover;
+    /* inside the circle div */
+    width: 100px;
+    height: 100px;
+}
+
+.userName {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1f1e1e;
+    font-weight: bold;
+}
+
+.Useremail h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1f1e1e;
+    font-weight: lighter;
+    font-size: medium;
+}
+
+.UserBio p {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1f1e1e;
+    font-weight: lighter;
+    font-size: 16px;
+    margin-left: 30px;
+    margin-right: 30px;
+    text-align: center;
+}
+
+
+.blogSection {
+    background-color: aliceblue;
+    border: 1px solid #333;
+    border-radius: 8px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    margin: 10px 0;
+
+
+}
+.divider {
+  border: none;
+  border-top: 1px solid grey;
+  margin: 20px 0;
+  /* Space above and below */
+  width: 100%;
+}
+
+.blogSection h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1f1e1e;
+    font-weight: lighter;
+    font-size: medium;
+    margin: 0 0 8px 0 ;
+}
+
+.blogSection h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1f1e1e;
+    font-weight: bolder;
+    font-size: 3rem; 
+    margin : 0 ; 
+    
+}
+
+.buttonsSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;  
+
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;   
+    margin: 10px 0;
+
+}
+
+.editButton button {
+    background: linear-gradient(135deg, #E8527A 0%, #F4829A 50%, #C0395C 100%);
+    border-color: #333;
+    border-radius: 8px;
+    color: black;
+
+    width: 120px;
+    height: 40px;
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    margin-top: 4px;
+
+
+}
+
+.Logoutbutton button {
+    background-color: aliceblue;
+    border-color: linear-gradient(135deg, #E8527A 0%, #F4829A 50%, #C0395C 100%);
+    border-radius: 8px;
+    color: black;
+
+    width: 120px;
+    height: 40px;
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    margin-top: 4px;
+
+
+}
