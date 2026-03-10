@@ -24,6 +24,7 @@ body {
 }
 
 .card {
+
     /* here the flex items will be the actual card items */
     display: flex;
     flex-direction: column;
@@ -34,11 +35,16 @@ body {
 
     width: 400px;
     height: fit-content;
+    border: 1px solid #c0395c;
     backdrop-filter: blur(10px);
-    background-color: #F296B2CC;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 2rem;
+
+    /* animation*/
+    opacity: 0;
+    animation: pageEnter 0.6s ease-out 0.2s forwards;
 
 
 }
@@ -70,14 +76,55 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #1f1e1e;
     font-weight: bold;
+
+
 }
 
-.Useremail h3 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #1f1e1e;
-    font-weight: lighter;
-    font-size: medium;
+/* edittt the emaillll section !!!!!!!!!!!!*/
+
+.Useremail {
+    width: 50%;
+    box-sizing: border-box;
+    margin: 4px 0;
 }
+
+.emailRow {
+    display: flex;
+    /* defult value which is row */ 
+    justify-content: space-between;
+    align-items: center;
+    
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #1f1e1e;
+
+    background-color: aliceblue;
+    /* matches blogSection */
+    border: 1px solid #333;
+    /* matches blogSection */
+    border-radius: 8px;
+
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    /* breathing room like blogSection */
+    margin: 10px 0;
+}
+
+.editIcon {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.editIcon:hover {
+    opacity: 1;
+}
+
 
 .UserBio p {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -109,12 +156,13 @@ body {
 
 
 }
+
 .divider {
-  border: none;
-  border-top: 1px solid grey;
-  margin: 20px 0;
-  /* Space above and below */
-  width: 100%;
+    border: none;
+    border-top: 1px solid grey;
+    margin: 10px 0;
+    /* Space above and below */
+    width: 100%;
 }
 
 .blogSection h2 {
@@ -122,16 +170,16 @@ body {
     color: #1f1e1e;
     font-weight: lighter;
     font-size: medium;
-    margin: 0 0 8px 0 ;
+    margin: 0 0 8px 0;
 }
 
 .blogSection h4 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #1f1e1e;
     font-weight: bolder;
-    font-size: 3rem; 
-    margin : 0 ; 
-    
+    font-size: 3rem;
+    margin: 0;
+
 }
 
 .buttonsSection {
@@ -140,20 +188,20 @@ body {
     justify-content: center;
     align-items: center;
 
-    gap: 10px;  
+    gap: 10px;
 
     width: 100%;
     box-sizing: border-box;
-    padding: 10px 20px;   
+    padding: 10px 20px;
     margin: 10px 0;
 
 }
 
 .editButton button {
     background: linear-gradient(135deg, #E8527A 0%, #F4829A 50%, #C0395C 100%);
-    border-color: #333;
-    border-radius: 8px;
-    color: black;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
 
     width: 120px;
     height: 40px;
@@ -161,11 +209,22 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 0.95rem;
     font-weight: 600;
-
+    box-shadow: 0 4px 20px rgba(232, 82, 122, 0.4);
     margin-top: 4px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
 
 
 }
+
+.editButton button:hover {
+    background-color: #f0e6e6;  
+    border-color: #C0395C;       
+    transition: all 0.2s ease;
+}
+
 
 .Logoutbutton button {
     background-color: aliceblue;
@@ -182,5 +241,31 @@ body {
 
     margin-top: 4px;
 
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+
+}
+
+.Logoutbutton button:hover {
+    background-color: #f0e6e6;  
+    border-color: #C0395C;       
+    transition: all 0.2s ease;
+}
+
+
+
+/* ---------------- the animation ------------- */
+@keyframes pageEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
 }
