@@ -63,7 +63,7 @@ label {
 .input_fields {
   width: 85%;
   margin-bottom: 10px;
-  padding: 13px 44px 13px 16px;
+  padding: 10px 40px 10px 14px;
   background: rgba(255, 255, 255, 0.3);
   border: 1.5px solid #8E2A44;
   border-radius: 12px;
@@ -239,9 +239,9 @@ label {
 
   /* remove the large right padding that caused overflow */
   .input_fields {
-    width: 100%;
+    width: 95%;
     box-sizing: border-box;
-    padding: 13px 16px;
+    padding: 10px 14px;
   }
 
   .button {
