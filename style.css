@@ -103,8 +103,9 @@ label {
 
 
 .button {
-  width: 95%;
+  width: 100%;
   padding: 14px;
+  display: block ;
 
   background: linear-gradient(135deg, #E8527A 0%, #F4829A 50%, #C0395C 100%);
   /* not a static color a linear gradiant */
@@ -124,16 +125,20 @@ label {
 
   box-shadow: 0 4px 20px rgba(232, 82, 122, 0.4);
   margin-top: 4px;
+     
+  
 
 }
 
 .button:hover {
   background-color: #A32F4E;
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* the animation */ 
   /* Lifts the button up slightly */
   box-shadow: 0 5px 15px rgba(192, 57, 92, 0.3);
   /* Adds a soft pink glow */
   cursor: pointer;
+
+
 }
 
 
@@ -200,46 +205,47 @@ label {
 }
 
 
-/* ------------------ to make it rersposive -----------------*/ 
+/* ------------------ to make it responsive -----------------*/
 
-@media (max-width: 768px)
-/* this is like a IF statement (if the screen width is 768px or less -> switch to the mobile (the code in the curly {} ) ) */
-  {
-  .pageContainer
+@media (max-width: 768px) {
 
-  /* changing the layout (row->col) */
-    {
+  /* switch from row to column layout */
+  .pageContainer {
     flex-direction: column;
     height: auto;
+    min-height: 100vh;
   }
 
+  /* hide image on mobile */
   .imageSection {
-    /* remove the image for better UX */
     display: none;
   }
 
+  /* remove the 400px min-width that was forcing horizontal overflow */
   .FormSection {
     width: 100%;
-    /*cover all screen cuz there is no image */
-    padding: 20px;
     min-width: unset;
+    padding: 20px;
     box-sizing: border-box;
   }
 
+  /* card should not overflow the screen */
   .whole-card {
-    width: 90%;
-    /* a little bit smaller than the screen width */
+    width: 100%;
     max-width: 400px;
-    /* for tablets */
     box-sizing: border-box;
+    padding: 1.5rem;
   }
 
+  /* remove the large right padding that caused overflow */
   .input_fields {
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 16px;
   }
 
   .button {
     width: 100%;
+    box-sizing: border-box;
   }
-
 }
