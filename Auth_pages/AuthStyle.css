@@ -10,6 +10,7 @@ body {
   background-repeat: no-repeat;
   background-color: aliceblue;
   background-size: cover;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 
@@ -33,7 +34,6 @@ body {
 }
 
 .header {
-  font-family: 'Plus Jakarta Sans', sans-serif;
   color: black;
 }
 
@@ -53,7 +53,7 @@ label {
   font-weight: 600;
   /* Optional: make it pop a bit more */
   font-size: 0.75rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  
   font-weight: 600;
   color: #4A2D35;
   text-transform: uppercase;
@@ -67,7 +67,7 @@ label {
   background: rgba(255, 255, 255, 0.3);
   border: 1.5px solid #8E2A44;
   border-radius: 12px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  
   font-size: 0.95rem;
   color: #2D1B1E;
   
@@ -85,7 +85,7 @@ label {
   font-weight: 500;
   color: #C0395C;
   text-decoration: none;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  
 
   margin-top: -8px;
   margin-bottom: 15px;
@@ -116,7 +116,7 @@ label {
   border: none;
   border-radius: 12px;
 
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  
   font-size: 0.95rem;
   font-weight: 600;
 
@@ -144,7 +144,7 @@ label {
 
 .notes {
   color: #7A4F57;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  
   font-size: small;
 
 }

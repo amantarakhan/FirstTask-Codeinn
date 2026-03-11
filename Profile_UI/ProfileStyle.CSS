@@ -7,7 +7,9 @@ body {
     background-image: url('../Profile_UI/assets/background.jpg');
     background-size: cover;
     background-position: center;
-     background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    /* add the font here */ 
+    font-family: 'Plus Jakarta Sans', sans-serif;
 
 }
 
@@ -121,8 +123,6 @@ body {
     justify-content: space-between;
     align-items: center;
 
-
-    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 0.95rem;
     font-weight: 400;
     color: #1f1e1e;
@@ -132,7 +132,6 @@ body {
     border: 1px solid #333;
     /* matches blogSection */
     border-radius: 8px;
-
     width: 100%;
     box-sizing: border-box;
     padding: 10px 20px;
@@ -154,7 +153,6 @@ body {
 
 
 .UserBio p {
-    font-family: 'Plus Jakarta Sans', sans-serif;
     color: #1f1e1e;
     font-weight: lighter;
     font-size: 16px;
@@ -193,7 +191,7 @@ body {
 }
 
 .blogSection h2 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    
     color: #1f1e1e;
     font-weight: lighter;
     font-size: medium;
@@ -201,7 +199,7 @@ body {
 }
 
 .blogSection h4 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    
     color: #1f1e1e;
     font-weight: bolder;
     font-size: 3rem;
@@ -233,7 +231,7 @@ body {
     width: 120px;
     height: 40px;
 
-    font-family: 'Plus Jakarta Sans', sans-serif;
+   
     font-size: 0.95rem;
     font-weight: 600;
     box-shadow: 0 4px 20px rgba(232, 82, 122, 0.4);
@@ -262,7 +260,7 @@ body {
     width: 120px;
     height: 40px;
 
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    
     font-size: 0.95rem;
     font-weight: 600;
 
