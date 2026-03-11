@@ -21,7 +21,7 @@ body {
     /* Horizantal centering */
     align-items: center;
     /* Vertical centering */
-    height: 100vh;
+    min-height: 100vh;
 
     padding: 40px 16px;
     box-sizing: border-box;
@@ -297,11 +297,17 @@ body {
 
 /* for it to be responvie (i added more that one sizes ) using @media */  
 @media  ( max-width: 360px ) { /*small phones*/
-.card  { 
-    padding: 1.25rem;
-    border-radius: 6px; 
-}
-.pfpContainer {
+    .cardContainer {
+        padding: 40px 24px; /* background visible on sides */
+    }
+
+    .card  { 
+        padding: 1.25rem;
+        border-radius: 6px;
+        width: min(300px, 85%); /* smaller card = more background visible */
+    }
+
+    .pfpContainer {
         width: 90px;
         height: 90px;
     }
@@ -335,9 +341,14 @@ body {
     }
 }
 
-@media (min-width: 361px) and (max-width: 480px) { /* this is for medium phones */ 
+@media (min-width: 361px) and (max-width: 480px) { /* standard phones */
+    .cardContainer {
+        padding: 48px 28px; /* background visible on sides */
+    }
+
     .card {
         padding: 1.5rem;
+        width: min(360px, 88%); /* smaller card = more background visible */
     }
 
     .Useremail {
@@ -352,7 +363,11 @@ body {
 /* tablets  */
 @media (min-width: 481px) and (max-width: 768px) {
     .cardContainer {
-        padding: 60px 32px;
+        padding: 60px 40px;
+    }
+
+    .card {
+        width: min(380px, 80%); /* background shows on both sides */
     }
 
     .Useremail {
@@ -366,6 +381,3 @@ body {
         padding: 80px 24px;
     }
 }
-
-
-
