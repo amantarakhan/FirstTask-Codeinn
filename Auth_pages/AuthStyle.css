@@ -207,7 +207,54 @@ label {
 
 /* ------------------ to make it responsive -----------------*/
 
-@media (max-width: 768px) {
+/* Small phones (≤ 360px) */
+@media (max-width: 360px) {
+  .pageContainer {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .imageSection {
+    display: none;
+  }
+
+  .FormSection {
+    width: 100%;
+    min-width: unset;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .whole-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.25rem;
+  }
+
+  .header h1 {
+    font-size: 1.3rem;
+  }
+
+  .input_fields {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+  }
+
+  .button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+  }
+}
+
+
+
+/* edited the responsiveness here */ 
+
+/* Standard phones */
+@media (min-width: 361px) and (max-width: 768px) {
 
   /* switch from row to column layout */
   .pageContainer {
@@ -221,7 +268,7 @@ label {
     display: none;
   }
 
-  /* remove the 400px min-width that was forcing horizontal overflow */
+ 
   .FormSection {
     width: 100%;
     min-width: unset;
@@ -229,7 +276,7 @@ label {
     box-sizing: border-box;
   }
 
-  /* card should not overflow the screen */
+ 
   .whole-card {
     width: 100%;
     max-width: 400px;
@@ -237,9 +284,8 @@ label {
     padding: 1.5rem;
   }
 
-  /* remove the large right padding that caused overflow */
   .input_fields {
-    width: 95%;
+    width: 100%;
     box-sizing: border-box;
     padding: 10px 14px;
   }
@@ -247,5 +293,22 @@ label {
   .button {
     width: 100%;
     box-sizing: border-box;
+  }
+}
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .FormSection {
+    min-width: unset;
+    flex: 1;
+  }
+
+  .imageSection img {
+    width: 90%;
+    max-height: 70vh;
+  }
+
+  .whole-card {
+    width: min(350px, 90%);
   }
 }
