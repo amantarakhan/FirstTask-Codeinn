@@ -13,8 +13,7 @@
             <!-- this is the div that will hold the card -->
             <div class="pfpContainer">
                 <label for="pfpUpload" class="pfpLabel">
-                    <img src="../Profile_UI/assets/PFPplaceholder.png"
-                        class="pfpImg">
+                    <img src="../Profile_UI/assets/PFPplaceholder.png" class="pfpImg">
                 </label>
             </div>
             <input type="file" id="pfpUpload" class="pfpInput">
@@ -58,4 +57,26 @@
         </div>
 
     </div>
+
+
+    <!-- the js code that replace the placeholder pfp with the image the user choose -->
+
+    <script>
+        const pfpInput = document.getElementById('pfpUpload'); /* the id that we used above */ 
+        const pfpImg = document.querySelector('.pfpImg');
+
+        pfpInput.addEventListener('change', function () {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    pfpImg.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
