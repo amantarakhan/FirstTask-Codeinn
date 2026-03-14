@@ -131,6 +131,7 @@ body {
   width: fit-content;
   min-width: 200px;
   margin-bottom: 32px;
+  align-self: stretch; /* stretches to fill column 1 width — same as buttonsSection */
 }
 
 .blogSection h2 {

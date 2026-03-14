@@ -4,16 +4,16 @@
 
 /* Website Color Variables  */
 :root {
-    --color-bg:            #F5F0EB;
-    --color-card:          #EDE8E1;
-    --color-primary:       #C8714A;
+    --color-bg: #F5F0EB;
+    --color-card: #EDE8E1;
+    --color-primary: #C8714A;
     --color-primary-hover: #B05A35;
-    --color-text-dark:     #2B2118;
-    --color-text-mid:      #6B4F3A;
-    --color-text-light:    #9C8070;
-    --color-border:        #DDD0C5;
-    --color-input-bg:      #F0EBE4;
-    --color-shadow:        rgba(43, 33, 24, 0.10);
+    --color-text-dark: #2B2118;
+    --color-text-mid: #6B4F3A;
+    --color-text-light: #9C8070;
+    --color-border: #DDD0C5;
+    --color-input-bg: #F0EBE4;
+    --color-shadow: rgba(43, 33, 24, 0.10);
 }
 
 
@@ -29,12 +29,14 @@ body {
 /*  PAGE LAYOUT — Grid: header / main(also grid with 2 column) / footer*/
 .pageLayout {
     display: grid;
-    grid-template-rows: 64px 1fr 52px; /* 64 for the header 1fr for the main 52 for the footer */ 
-    
+    grid-template-rows: 64px 1fr 52px;
+    /* 64 for the header 1fr for the main 52 for the footer */
+
     grid-template-columns: 1fr;
     min-height: 100vh;
 
-    animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* animation */ 
+    animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    /* animation */
 
 }
 
@@ -48,9 +50,11 @@ header {
 /* nav is a flex row: logo | links | pfp */
 .navBar {
     display: flex;
-    flex-direction: row; /* the defult value */ 
+    flex-direction: row;
+    /* the defult value */
     justify-content: space-between;
-    align-items: center; /* vertically */ 
+    align-items: center;
+    /* vertically */
     height: 100%;
 }
 
@@ -91,7 +95,9 @@ header {
     transition: color 0.2s ease;
 }
 
-.navList a:hover,.navList a.active {  /* both hover and action got the same class */ 
+.navList a:hover,
+.navList a.active {
+    /* both hover and action got the same class */
     color: var(--color-text-dark);
     font-weight: 600;
 }
@@ -100,9 +106,10 @@ header {
 .pfpContainer {
     width: 55px;
     height: 55px;
-    overflow: hidden; 
+    overflow: hidden;
     border-radius: 50%;
 }
+
 .pfpContainer a {
     display: block;
     width: 100%;
@@ -176,7 +183,7 @@ main {
 /* image */
 .image img {
     width: 80%;
-    max-width: 300px ;
+    max-width: 300px;
     height: auto;
     object-fit: contain;
 }
@@ -236,6 +243,7 @@ label {
 .input_fields {
     width: 100%;
     padding: 11px 14px;
+    box-sizing: border-box;
     background-color: var(--color-input-bg);
     border: 1.5px solid var(--color-border);
     border-radius: 8px;
@@ -250,7 +258,7 @@ label {
     color: var(--color-text-light);
 }
 
-.input_fields:active {
+.input_fields:focus {
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(200, 113, 74, 0.15);
 }
@@ -266,11 +274,17 @@ label {
     font-size: 0.85rem;
     font-weight: 600;
     margin: 0;
-    min-height: 20px; /* keeps layout stable when empty */
+    min-height: 20px;
+    /* keeps layout stable when empty */
 }
 
-.formFeedback.success { color: #4A7C59; }
-.formFeedback.error   { color: #B03A2E; }
+.formFeedback.success {
+    color: #4A7C59;
+}
+
+.formFeedback.error {
+    color: #B03A2E;
+}
 
 /* Send button */
 .sendButton {
@@ -317,12 +331,13 @@ footer p {
 }
 
 
-/* ANIMATIOM */ 
+/* ANIMATIOM */
 @keyframes pageEnter {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -356,12 +371,18 @@ footer p {
     .illustration img {
         width: 40%;
     }
+
+    .imageSection {
+        display: none;
+    }
+
 }
 
 /* Small phones */
 @media (max-width: 400px) {
     .navList {
-        display: none; /* hide nav links on very small screens */
+        display: none;
+        /* hide nav links on very small screens */
     }
 
     main {
@@ -372,4 +393,10 @@ footer p {
     .formCard h2 {
         font-size: 1.5rem;
     }
+
+    .image {
+        display: none;
+    }
+
+
 }

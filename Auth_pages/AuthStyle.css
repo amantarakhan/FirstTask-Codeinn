@@ -19,7 +19,10 @@
   --color-shadow:      rgba(43, 33, 24, 0.10);
 }
 
-
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -70,6 +73,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0;
+  box-sizing: border-box;
 }
 
 /* ── Logo ── */
@@ -89,7 +93,7 @@ body {
 .logo-name {
   height: 32px;
   object-fit: contain;
-  margin-left: 2px;
+  margin-left: -6px;
 }
 
 /* ── Header ── */
@@ -133,6 +137,7 @@ body {
 form {
   display: grid;
   gap: 16px;
+  width: 100%;
 }
 
 /* ── Labels ── */
@@ -220,6 +225,12 @@ label {
   margin: 4px 0;
 }
 
+.or-divider::before,
+.or-divider::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid var(--color-divider);
+}
 
 /* ── Social Buttons (Grid: two columns) ── */
 .social-buttons {
