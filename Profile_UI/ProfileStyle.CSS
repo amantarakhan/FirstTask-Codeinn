@@ -1,383 +1,337 @@
+/* ProfileStyle.CSS */
+
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-/* the font that i will be using */
+
+/* ── Website Color Variables ── */
+:root {
+  --color-bg:            #F5F0EB;
+  --color-card:          #EDE8E1;
+  --color-primary:       #C8714A;
+  --color-primary-hover: #B05A35;
+  --color-text-dark:     #2B2118;
+  --color-text-mid:      #6B4F3A;
+  --color-text-light:    #9C8070;
+  --color-border:        #DDD0C5;
+  --color-shadow:        rgba(43, 33, 24, 0.10);
+}
+
 
 body {
-    margin: 0;
-    padding: 0%;
-    background-image: url('../assests/background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* add the font here */ 
-    font-family: 'Plus Jakarta Sans', sans-serif;
-
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--color-text-dark);
 }
+
 
 .cardContainer {
-    /* here the flex items will be the card itself */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* Horizantal centering */
-    align-items: center;
-    /* Vertical centering */
-    min-height: 100vh;
-
-    padding: 40px 16px;
-    box-sizing: border-box;
-
+    /* this use Flexbox so its Center his child whivh id the card that uses grid in the screen  */ 
+    /*(Flexbox) → centers .card on the page*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 24px;
 }
 
+/* ── Card: Grid with 2 columns (info left, photo right) ── */
 .card {
+    /*(Grid)    → arranges name/email/photo inside itself
+    column 1: name, email, bio, blogs, buttons
+    olumn 2: photo */
 
-    /* here the flex items will be the actual card items */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* main axis which is vertical if we use the flexBox as a column  العكس صحيح */
-    align-items: center;
-    /* cress axis which is horizantal if we use the flexBox as a column  والعكس صحيح X*/
+  display: grid;
+  grid-template-columns: 1fr auto; /* the first child is 1 fragment and the image take whats left */ 
+  grid-template-rows: auto auto auto auto auto; /* defining **5 rows**, and each one is set to auto -? which is means be tall as the content inside you needs */ 
+  column-gap: 60px;
+  row-gap: 0;
 
-    width: min(400px, 100%); 
-    height: fit-content;
-    border: 1px solid #c0395c;
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+  width: min(820px, 100%);
+  background-color: var(--color-bg);
+  border-radius: 16px;
+  padding: 56px 60px;
 
-    /* animation*/
-    opacity: 0;
-    animation: pageEnter 0.6s ease-out 0.2s forwards;
-
-
+  opacity: 0;
+  animation: pageEnter 0.6s ease-out 0.2s forwards;
 }
 
-.pfpContainer {
-    display: flex;
-    /* i wont use the flex-direction attribute - defult value (ROW) */
-    justify-content: center;
-    /* cuz here its a row this will handle the main axis which is horizantal */
-    align-items: center;
-    /* this will handle the cross axis which is vertical */
-
-    border: 3px solid #333;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    overflow: hidden;
-    position: relative;
-    /* this to make it under */
-
-
-
+/* ── Left column items (the contact information )— each spans column 1 ── */
+.userName { 
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0 0 8px 0;
 }
 
-.pfpInput {
-    display: none;
-    /* hide the real file input - the one with( choose file )*/
+.userName h2 { 
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin: 0;
+  line-height: 1.1;
 }
-
-.pfpLabel {
-    cursor: pointer;
-        /*for better UX - the user know it could be changes */
-    
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.pfpImg {
-
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    /*cicle*/
-    object-fit: cover;
-    border: 3px solid #8E2A44;
-}
-
-.userName {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #1f1e1e;
-    font-weight: bold;
-
-
-}
-
-/* edittt the emaillll section !!!!!!!!!!!!*/
 
 .Useremail {
-    width: 80%;
-    box-sizing: border-box;
-    margin: 4px 0;
+  grid-column: 1;
+  grid-row: 2;
+  margin-bottom: 12px;
 }
 
 .emailRow {
-    display: flex;
-    /* defult value which is row */
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
 
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: #1f1e1e;
-
-    background-color: aliceblue;
-    /* matches blogSection */
-    border: 1px solid #333;
-    /* matches blogSection */
-    border-radius: 8px;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 20px;
-    /* breathing room like blogSection */
-    margin: 10px 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-primary);
 }
 
 .editIcon {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 
 .editIcon:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
+.UserBio {
+  grid-column: 1;
+  grid-row: 3;
+  margin-bottom: 24px;
+}
 
 .UserBio p {
-    color: #1f1e1e;
-    font-weight: lighter;
-    font-size: 16px;
-    margin-left: 30px;
-    margin-right: 30px;
-    text-align: center;
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: var(--color-text-mid);
+  margin: 0;
+  line-height: 1.6;
+  max-width: 340px;
 }
 
-
+/* ── Blog section ── */
 .blogSection {
-    background-color: aliceblue;
-    border: 1px solid #333;
-    border-radius: 8px;
+  grid-column: 1;
+  grid-row: 4;
 
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 20px;
-    margin: 10px 0;
-
-
-}
-
-.divider {
-    border: none;
-    border-top: 1px solid grey;
-    margin: 10px 0;
-    /* Space above and below */
-    width: 100%;
+  background-color: var(--color-card);
+  border-radius: 10px;
+  padding: 14px 20px;
+  width: fit-content;
+  min-width: 200px;
+  margin-bottom: 32px;
 }
 
 .blogSection h2 {
-    
-    color: #1f1e1e;
-    font-weight: lighter;
-    font-size: medium;
-    margin: 0 0 8px 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-light);
+  margin: 0;
 }
 
 .blogSection h4 {
-    
-    color: #1f1e1e;
-    font-weight: bolder;
-    font-size: 3rem;
-    margin: 0;
-
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0;
 }
 
+.blogSection h4 span {
+  color: var(--color-primary);
+  margin-left: 4px;
+}
+
+/* ── Buttons section ── */
 .buttonsSection {
-    display: flex;
-    flex-direction: row; /* defult */ 
-    justify-content: center;
-    align-items: center;
+  grid-column: 1;
+  grid-row: 5;
 
-    gap: 10px;
-
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 20px;
-    margin: 10px 0;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 
 .editButton button {
-    background: linear-gradient(135deg, #E8527A 0%, #F4829A 50%, #C0395C 100%);
-    border: none;
-    border-radius: 12px;
-    color: #fff;
-
-    width: 120px;
-    height: 40px;
-
-   
-    font-size: 0.95rem;
-    font-weight: 600;
-    box-shadow: 0 4px 20px rgba(232, 82, 122, 0.4);
-    margin-top: 4px;
-
-    cursor: pointer;
-
-    transition: all 0.2s ease;
-
-
+  padding: 11px 22px;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 0.80rem;
+  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 4px 14px rgba(200, 113, 74, 0.35);
 }
 
 .editButton button:hover {
-    background-color: #f0e6e6;
-    border-color: #C0395C;
-    transition: all 0.2s ease;
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
 }
 
+.Logoutbutton a {
+  text-decoration: none;
+}
 
 .Logoutbutton button {
-    background-color: aliceblue;
-    border-color: linear-gradient(135deg, #E8527A 0%, #F4829A 50%, #C0395C 100%);
-    border-radius: 8px;
-    color: black;
-
-    width: 120px;
-    height: 40px;
-
-    
-    font-size: 0.95rem;
-    font-weight: 600;
-
-    margin-top: 4px;
-
-    cursor: pointer;
-
-    transition: all 0.2s ease;
-
-
+  padding: 10px 22px;
+  background-color: transparent;
+  border: 1.5px solid var(--color-border);
+  border-radius: 50px;
+  color: var(--color-text-dark);
+  font-size: 0.80rem;
+  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  text-transform: uppercase; /* all the text written in a uppercase */ 
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .Logoutbutton button:hover {
-    background-color: #f0e6e6;
-    border-color: #C0395C;
-    transition: all 0.2s ease;
+  border-color: var(--color-primary);
+  background-color: #FBF7F4;
 }
 
+/* ── Right column: profile photo ── */
+.pfpContainer {
+  grid-column: 2;
+  grid-row: 1 / 6;   /* from row 1 to row 6 (all the grid area in the col 2 )*/ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
 
+  width: 220px;
+  height: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: none;
+  position: relative;
+}
 
-/* ---------------- the animation ------------- */
+.pfpInput {
+  display: none;
+}
+
+.pfpLabel {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pfpImg {
+  width: 220px;
+  height: 220px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+.pfpImg:hover {
+  opacity: 0.85;
+}
+
+/* ── Divider (keep for HTML compatibility, hidden visually) ── */
+.divider {
+  display: none;
+}
+
+/* ── Animation ── */
 @keyframes pageEnter {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* for it to be responvie (i added more that one sizes ) using @media */  
-@media  ( max-width: 360px ) { /*small phones*/
-    .cardContainer {
-        padding: 40px 24px; /* background visible on sides */
-    }
+/* ── Responsive ── */
 
-    .card  { 
-        padding: 1.25rem;
-        border-radius: 6px;
-        width: min(300px, 85%); /* smaller card = more background visible */
-    }
+/* Tablets */
+@media (max-width: 768px) {
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    padding: 36px 28px;
+    column-gap: 0;
+    row-gap: 0;
+  }
 
-    .pfpContainer {
-        width: 90px;
-        height: 90px;
-    }
+  /* on mobile: photo goes on top, center aligned */
+  .pfpContainer {
+    grid-column: 1;
+    grid-row: 1;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+  }
 
-    .pfpImg {
-        width: 90px;
-        height: 90px;
-    }
+  .pfpImg {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
 
-    .userName h2 {
-        font-size: 1.1rem;
-    }
+  .userName { grid-row: 2; text-align: center; }
+  .userName h2 { font-size: 1.8rem; }
 
-    .Useremail {
-        width: 95%;
-    }
+  .Useremail { grid-row: 3; justify-content: center; }
+  .emailRow  { justify-content: center; }
 
-    .emailRow {
-        font-size: 0.8rem;
-        padding: 8px 12px;
-    }
+  .UserBio   { grid-row: 4; text-align: center; }
+  .UserBio p { max-width: 100%; margin: 0 auto; }
 
-    .blogSection h4 {
-        font-size: 2.2rem;
-    }
+  .blogSection {
+    grid-row: 5;
+    width: 100%;
+    align-items: center;
+  }
 
-    .editButton button,
-    .Logoutbutton button {
-        width: 100px;
-        font-size: 0.85rem;
-    }
+  .buttonsSection {
+    grid-row: 6;
+    justify-content: center;
+  }
 }
 
-@media (min-width: 361px) and (max-width: 480px) { /* standard phones */
-    .cardContainer {
-        padding: 48px 28px; /* background visible on sides */
-    }
+/* Small phones */
+@media (max-width: 400px) {
+  .card {
+    padding: 28px 18px;
+  }
 
-    .card {
-        padding: 1.5rem;
-        width: min(360px, 88%); /* smaller card = more background visible */
-    }
+  .userName h2 {
+    font-size: 1.5rem;
+  }
 
-    .Useremail {
-        width: 90%;
-    }
-
-    .emailRow {
-        font-size: 0.88rem;
-    }
-}
-
-/* tablets  */
-@media (min-width: 481px) and (max-width: 768px) {
-    .cardContainer {
-        padding: 60px 40px;
-    }
-
-    .card {
-        width: min(380px, 80%); /* background shows on both sides */
-    }
-
-    .Useremail {
-        width: 75%;
-    }
-}
-
-/* Large screens */
-@media (min-width: 769px) {
-    .cardContainer {
-        padding: 80px 24px;
-    }
+  .editButton button,
+  .Logoutbutton button {
+    padding: 9px 16px;
+    font-size: 0.75rem;
+  }
 }

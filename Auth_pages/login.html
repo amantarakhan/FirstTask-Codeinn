@@ -1,51 +1,79 @@
 <!DOCTYPE html>
-
+<html lang="en">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> LogIn Page </title>
-  <link rel="stylesheet" href="../Auth_pages/AuthStyle.css" />
-
+  <title>Log In — Briefly</title>
+  <link rel="stylesheet" href="AuthStyle.css" />
 </head>
 
 <body>
   <div class="pageContainer">
+
+    <!-- Left: Form -->
     <div class="FormSection">
       <div class="whole-card">
+
+        <!-- Logo -->
+        <div class="logo">
+          <img class="logo-icon" src="../assests/logoWithoutName - Copy.png" alt="Briefly logo icon">
+          <img class="logo-name" src="../assests/name.png" alt="Briefly">
+        </div>
+
+        <!-- Header -->
         <div class="header">
-          <h1> Welcome Back </h1>
-          <p> Don't have an account? <a href="../Auth_pages/signIn.html"> Create one </a> </p>
+          <h1>Welcome Back</h1>
+          <p>Enter your credentials to continue your journey.</p>
         </div>
 
-        <hr class="divider">
+        <!-- Form -->
         <form action="../Profile_UI/profile.html" method="GET">
-          <div>
-            <label> Email </label>
-            <br>
-            <input type="email" class="input_fields" placeholder="you@email.com">
-          </div>
-          <div>
-            <label> Password </label>
-            <br>
-            <input type="password" class="input_fields" placeholder="********">
-          </div>
-          <a class="pass_reminder" href="forgetpass.html"> Forget Password ?  </a>
-
 
           <div>
-            <button class="button" type="submit"> Log in </button>
+            <label for="email">Email</label>
+            <input id="email" type="email" class="input_fields" placeholder="name@example.com">
           </div>
+
+          <div>
+            <label for="password">Password</label>
+            <input id="password" type="password" class="input_fields" placeholder="••••••••">
+            <a class="pass_reminder" href="forgetpass.html">Forgot Password?</a>
+          </div>
+
+          <div>
+            <button class="button" type="submit">Sign In</button>
+          </div>
+
         </form>
-        <hr class="divider">
-        <div>
-          <p class="notes"> By continuing, you agree to our Terms of Service and Privacy Policy. </p>
 
+        <!-- OR divider -->
+        <div class="or-divider">
+          <hr>
+          <span>Or sign in with</span>
+          <hr>
         </div>
+
+        <!-- Social buttons -->
+        <div class="social-buttons">
+          <a class="social-btn" href="#">Google</a>
+          <a class="social-btn" href="#">Apple</a>
+        </div>
+
+        <!-- Bottom note -->
+        <hr class="divider">
+        <p class="notes">
+          Don't have an account? <a href="signIn.html" style="color: var(--color-link); font-weight: 600;">Sign Up</a>
+        </p>
 
       </div>
     </div>
+
+    <!-- Right: Image -->
     <div class="imageSection">
-      <img src="../assests/image1.svg" >
+      <img src="../assests/loginImg.png" alt="Illustration">
     </div>
+
   </div>
 </body>
+
+</html>

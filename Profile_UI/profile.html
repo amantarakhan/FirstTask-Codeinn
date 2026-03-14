@@ -1,84 +1,69 @@
 <!DOCTYPE html>
 
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Profile Page </title>
+    <title>Profile Page</title>
     <link rel="stylesheet" href="ProfileStyle.CSS" />
 </head>
 
 <body>
     <div class="cardContainer">
-        <!-- this is the mother div (will contain all the content) -->
-        <div class="card">
-            <!-- this is the div that will hold the card -->
-            <div class="pfpContainer">
-                <label for="pfpUpload" class="pfpLabel">
-                    <img src="../assests/PFPplaceholder.png" class="pfpImg">
-                </label>
-            </div>
-            <input type="file" id="pfpUpload" class="pfpInput">
+                <!-- this is the mother div (will contain all the content) -->
 
+        <div class="card">
+             <!-- this is the div that will hold the card -->
+
+
+            <!-- Name — grid column 1, row 1 -->
             <div class="userName">
-                <!-- this div to hold the User name section -->
-                <h2> Omar Tarakhan </h2>
+                <h2>Omar Tarakhan</h2>
             </div>
+
+            <!-- Email — grid column 1, row 2 -->
             <div class="Useremail">
                 <div class="emailRow">
-                    <span>Omar@gmail.com </span>
-                    <img class="editIcon" src="../assests/editIcon.svg">
+                    <img class="editIcon" src="../assests/editIcon.svg" alt="edit">
+                    <span>Omar@gmail.com</span>
                 </div>
             </div>
+
+            <!-- Bio — grid column 1, row 3 -->
             <div class="UserBio">
-                <!-- this div is for short Bio-->
-                <p> FrontEnd Developer and software engineer , Exploring new technologies and sharing knowledge with the
-                    community </p>
+                <p>FrontEnd Developer and software engineer, Exploring new technologies and sharing knowledge with the community</p>
             </div>
 
-            <!-- now for the Blog card section - also vertical -->
+            <!-- Blog count — grid column 1, row 4 -->
             <div class="blogSection">
-                <!-- this div hold the whole card -->
-                <h2> Blogs Published </h2>
-                <hr class="divider">
-                <h4> 12 </h4>
+                <h2>Author Portfolio</h2>
+                <h4>Blogs Published: <span>12</span></h4>
             </div>
 
-
-
-
-            <!-- now for the buttons section -->
+            <!-- Buttons — grid column 1, row 5 -->
             <div class="buttonsSection">
                 <div class="editButton">
-                    <button> edit Profile </button>
+                    <button>Edit Profile</button>
                 </div>
                 <div class="Logoutbutton">
-                    <a href="../Auth_pages/login.html"> 
-                    <button> LogOut </button>
+                    <a href="../Auth_pages/login.html">
+                        <button>Logout</button>
                     </a>
                 </div>
             </div>
+
+            <!-- Profile photo — grid column 2, spans all rows -->
+            <div class="pfpContainer">
+                <label for="pfpUpload" class="pfpLabel">
+                    <img src="../assests/PFPplaceholder.png" class="pfpImg" alt="Profile Picture">
+                </label>
+            </div>
+            <input type="file" id="pfpUpload" class="pfpInput" accept="image/*">
+
         </div>
 
     </div>
 
-
-    <!-- the js code that replace the placeholder pfp with the image the user choose -->
-
-    <script>
-        const pfpInput = document.getElementById('pfpUpload'); /* the id that we used above */ 
-        const pfpImg = document.querySelector('.pfpImg');
-
-        pfpInput.addEventListener('change', function () {
-            const file = this.files[0];
-
-            if (file) {
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                    pfpImg.src = e.target.result;
-                };
-
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
+
+</html>
