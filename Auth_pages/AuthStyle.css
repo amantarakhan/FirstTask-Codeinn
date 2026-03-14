@@ -19,10 +19,7 @@
   --color-shadow:      rgba(43, 33, 24, 0.10);
 }
 
-/* ── Reset & Base ── */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+
 
 body {
   margin: 0;
@@ -215,11 +212,14 @@ label {
 
 /* ── "Or sign in with" divider ── */
 .or-divider {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--color-text-light);
+  font-size: 0.80rem;
+  margin: 4px 0;
 }
+
 
 /* ── Social Buttons (Grid: two columns) ── */
 .social-buttons {
