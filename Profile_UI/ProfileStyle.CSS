@@ -19,20 +19,30 @@
 body {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
   background-color: var(--color-bg);
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--color-text-dark);
 }
 
 
-.cardContainer {
-    /* this use Flexbox so its Center his child whivh id the card that uses grid in the screen  */ 
-    /*(Flexbox) → centers .card on the page*/
+.pageLayout {
+    /* PAGE LAYOUT — Grid: header / main / footer (same as contact page) */
+    display: grid;
+    grid-template-rows: 64px 1fr 52px;
+    /* 64 for the header, 1fr for the main, 52 for the footer */
+
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+
+    animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    /* animation */
+}
+
+/* main centers the card (Flexbox) → centers .card on the page */
+main {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   padding: 40px 24px;
 }
 
@@ -56,6 +66,92 @@ body {
   opacity: 0;
   animation: pageEnter 0.6s ease-out 0.2s forwards;
 }
+
+
+/* HEADER */
+header {
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 48px;
+}
+
+/* nav is a flex row: logo | links | pfp */
+.navBar {
+    display: flex;
+    flex-direction: row;
+    /* the defult value */
+    justify-content: space-between;
+    align-items: center;
+    /* vertically */
+    height: 100%;
+}
+
+/* Logo (flex row — same as auth pages) */
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+.logo-name {
+    height: 22px;
+    object-fit: contain;
+    margin-left: 2px;
+}
+
+/* Nav links */
+.navList {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navList a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-text-mid);
+    transition: color 0.2s ease;
+}
+
+.navList a:hover,
+.navList a.active {
+    /* both hover and action got the same class */
+    color: var(--color-text-dark);
+    font-weight: 600;
+}
+
+/* Profile picture in nav */
+.pfpContainer {
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.pfpContainer a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.pfp {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+}
+
 
 /* ── Left column items (the contact information )— each spans column 1 ── */
 .userName { 
@@ -212,7 +308,7 @@ body {
 }
 
 /* ── Right column: profile photo ── */
-.pfpContainer {
+.cardPfpContainer {
   grid-column: 2;
   grid-row: 1 / 6;   /* from row 1 to row 6 (all the grid area in the col 2 )*/ 
   display: flex;
@@ -259,6 +355,24 @@ body {
   display: none;
 }
 
+
+/* 
+   FOOTER
+ */
+footer {
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer p {
+    font-size: 0.80rem;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
 /* ── Animation ── */
 @keyframes pageEnter {
   from {
@@ -284,7 +398,7 @@ body {
   }
 
   /* on mobile: photo goes on top, center aligned */
-  .pfpContainer {
+  .cardPfpContainer {
     grid-column: 1;
     grid-row: 1;
     width: 120px;

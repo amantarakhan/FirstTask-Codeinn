@@ -275,7 +275,7 @@ label {
     font-weight: 600;
     margin: 0;
     min-height: 20px;
-    /* keeps layout stable when empty */
+    
 }
 
 .formFeedback.success {
@@ -368,18 +368,15 @@ footer p {
         gap: 32px;
     }
 
-    .illustration img {
+    .image img {
         width: 40%;
     }
 
-    .imageSection {
-        display: none;
-    }
 
 }
 
 /* Small phones */
-@media (max-width: 400px) {
+@media (min-width: 361px) and (max-width: 768px) {
     .navList {
         display: none;
         /* hide nav links on very small screens */
@@ -394,9 +391,9 @@ footer p {
         font-size: 1.5rem;
     }
 
-    .image {
-        display: none;
+.image img{
+     display: none; 
     }
 
 
-}
+}   
