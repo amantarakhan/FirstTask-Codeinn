@@ -373,6 +373,11 @@ footer p {
     margin: 0;
 }
 
+
+
+
+
+
 /* ── Animation ── */
 @keyframes pageEnter {
   from {
@@ -384,6 +389,10 @@ footer p {
     transform: translateY(0);
   }
 }
+
+
+
+
 
 /* ── Responsive ── */
 

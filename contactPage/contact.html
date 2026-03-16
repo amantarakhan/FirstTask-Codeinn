@@ -28,17 +28,17 @@
 
                 <!-- Nav links -->
                 <ul class="navList">
-                    <li><a href="home.html" >Home</a></li> <!-- still not implemented -->
+                    <li><a href="home.html">Home</a></li> <!-- still not implemented -->
                     <li><a href="../Profile_UI/profile.html">Profile</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
 
                 <!-- Profile picture -->
                 <div class="pfpContainer">
-    <a href="../Profile_UI/profile.html">
-        <img id="navbarPfp" src="../assests/PFPplaceholder.png" class="pfp" alt="Profile">
-    </a>
-</div>
+                    <a href="../Profile_UI/profile.html">
+                        <img id="navbarPfp" src="../assests/PFPplaceholder.png" class="pfp" alt="Profile">
+                    </a>
+                </div>
             </nav>
         </header>
 
@@ -51,9 +51,18 @@
                     <h2>Contact Information</h2>
 
                     <div class="infoList">
-                        <p><span class="infoLabel">Email</span> aman@gmail.com</p>
-                        <p><span class="infoLabel">Phone</span> 0789632456</p>
-                        <p><span class="infoLabel">Location</span> Amman, Jordan.</p>
+                        <p>
+                            <span class="infoLabel">Email</span>
+                            <a href="mailto:amantarakhan@gmail.com">amantarakhan@gmail.com</a>
+                        </p>
+                        <p>
+                            <span class="infoLabel">Phone</span>
+                            <a href="tel:0788355415">0788355415</a>
+                        </p>
+                        <p>
+                            <span class="infoLabel">Location : </span>
+                            <a href="https://maps.app.goo.gl/9Cp2yxEDzBCUUj6X7">Queen Rania St 362, Amman</a>
+                        </p>
                     </div>
                 </div>
 
@@ -76,7 +85,8 @@
                         <div class="fieldGroup">
                             <label for="fullName">Full Name</label>
                             <input type="text" id="fullName" class="input_fields" name="name"
-                                placeholder="E.g. Aman tarakhan" required> <!-- added required so the button cant be pressed of its empty -->
+                                placeholder="E.g. Aman tarakhan" required>
+                            <!-- added required so the button cant be pressed of its empty -->
                         </div>
 
                         <div class="fieldGroup">
@@ -87,7 +97,7 @@
 
                         <div class="fieldGroup">
                             <label for="userMessage">Your Message</label>
-                            <textarea id="userMessage"  class="input_fields textarea" name="message"
+                            <textarea id="userMessage" class="input_fields textarea" name="message"
                                 placeholder="Write your message here..." rows="5" required></textarea>
                         </div>
 
