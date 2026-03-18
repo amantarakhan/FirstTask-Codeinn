@@ -4,10 +4,12 @@ if (savedPfp) {
     document.getElementById("navbarPfp").src = savedPfp;
 }
 
+
+
 // ── Handle Create Blog Form ──
 window.addEventListener("load", function () {
     const blogForm = document.getElementById("blogForm");
-    
+
     if (!blogForm) return;
 
     const imageUrlInput = document.getElementById("imageUrl");
@@ -47,7 +49,16 @@ window.addEventListener("load", function () {
 
     // ── Handle Form Submission ──
     blogForm.addEventListener("submit", async function (e) { // Listen for when user clicks "Publish Story"
+        //stops the browser’s default behavior for that event. like you are saying : Hey browser, don’t do what you normally do for this action. 
+        // normally this is the dedult behavior when a user submit a form : The page reloads -> Data is sent to the server 
+        // when we stop this behaviour -> the page wont reload and the data can be handled using JavaScript
         e.preventDefault();
+
+        //stops the event from bubbling up (or down) the DOM tree.
+        // In JavaScript, events bubble up from child → parent. 
+        // means =  Don’t trigger parent elements (it only controls Who else gets notified that this event happened?) 
+        // used here so the container never knows the form was submitted.
+        // It’s only useful when:There are parent elements listening to the same event
         e.stopPropagation();
 
         // Disable button while processing
@@ -76,10 +87,14 @@ window.addEventListener("load", function () {
         try { // using try and a catch for simple error handling 
             // ── Get image data - either from URL or uploaded file ──
             let imageData = imageUrl; // Start with URL if provided
-            
+
             // If file uploaded, convert it to base64
             if (uploadedFile) {
-                imageData = await fileToBase64(uploadedFile);
+                imageData = await fileToBase64(uploadedFile); //way to convert any data into a text format 
+
+                // base64 : 
+                // /Base64 lets you: turn a file into a string so you can store it, send it, or display it easily 
+                // the uploaded file is a binary data so in order to save it into the local storage we convert it into text using the base64 
             }
 
             // ── Create blog object as required in the task ──
@@ -94,14 +109,14 @@ window.addEventListener("load", function () {
             // ── Get existing blogs from localStorage (if any) ──
             let blogs = []; // Create empty array
             const existingBlogs = localStorage.getItem("blogs"); // Get saved blogs from storage
-            
+
             if (existingBlogs) { // Check if blogs exist
                 try {
                     blogs = JSON.parse(existingBlogs); // Convert text → JavaScript array
                     // Ensure it's an array
                     if (!Array.isArray(blogs)) { // Verify it's actually an array
                         blogs = []; // get it 
-                    } 
+                    }
                 } catch (e) { // if any error happen use empty array
                     console.error("Error parsing existing blogs:", e);
                     blogs = []; // this is the empty array 
@@ -122,11 +137,6 @@ window.addEventListener("load", function () {
             blogForm.reset();
             fileNameDisplay.textContent = "";
 
-            // Optional: Redirect after a short delay
-            setTimeout(() => {
-                // Uncomment the line below if you want to redirect after publishing
-                // window.location.href = "home.html";
-            }, 1500);
 
         } catch (error) {
             console.error("Error publishing blog:", error);

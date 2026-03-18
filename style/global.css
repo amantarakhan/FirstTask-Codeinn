@@ -1,22 +1,27 @@
-/* contactStyle.css */
+/* global.css — Shared reusable styles for Briefly */
+/* Imported at the top of every page-specific CSS file */
 
+/* ── Google Fonts — Plus Jakarta Sans ── */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-/* Website Color Variables  */
+/* ── Website Color Variables ── */
 :root {
-    --color-bg: #F5F0EB;
-    --color-card: #EDE8E1;
-    --color-primary: #C8714A;
-    --color-primary-hover: #B05A35;
-    --color-text-dark: #2B2118;
-    --color-text-mid: #6B4F3A;
-    --color-text-light: #9C8070;
-    --color-border: #DDD0C5;
-    --color-input-bg: #F0EBE4;
-    --color-shadow: rgba(43, 33, 24, 0.10);
+    --color-bg:            #F5F0EB;       /* warm cream background */
+    --color-card:          #EDE8E1;       /* card / section background */
+    --color-primary:       #C8714A;       /* warm terracotta – buttons, accents */
+    --color-primary-hover: #B05A35;       /* darker terracotta on hover */
+    --color-text-dark:     #2B2118;       /* near-black for headings */
+    --color-text-mid:      #6B4F3A;       /* medium brown for sub-text */
+    --color-text-light:    #9C8070;       /* muted brown for notes / placeholders */
+    --color-border:        #DDD0C5;       /* soft border */
+    --color-input-bg:      #F0EBE4;       /* light warm input background */
+    --color-shadow:        rgba(43, 33, 24, 0.10);
 }
 
-
+/* ── Reset & Base ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -26,21 +31,20 @@ body {
     color: var(--color-text-dark);
 }
 
-/*  PAGE LAYOUT — Grid: header / main(also grid with 2 column) / footer*/
+/* ── Page Layout Grid ── */
+/* header / main(1fr) / footer — reused by contact, profile, and create pages */
 .pageLayout {
     display: grid;
     grid-template-rows: 64px 1fr 52px;
-    /* 64 for the header 1fr for the main 52 for the footer */
-
+    /* 64 for the header, 1fr for the main, 52 for the footer */
     grid-template-columns: 1fr;
     min-height: 100vh;
 
     animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     /* animation */
-
 }
 
-/* HEADER */
+/* ── HEADER ── */
 header {
     background-color: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
@@ -51,7 +55,7 @@ header {
 .navBar {
     display: flex;
     flex-direction: row;
-    /* the defult value */
+    /* the default value */
     justify-content: space-between;
     align-items: center;
     /* vertically */
@@ -97,7 +101,7 @@ header {
 
 .navList a:hover,
 .navList a.active {
-    /* both hover and action got the same class */
+    /* both hover and active got the same style */
     color: var(--color-text-dark);
     font-weight: 600;
 }
@@ -124,112 +128,7 @@ header {
     border: 2px solid var(--color-border);
 }
 
-
-/* MAIN — Grid: left section (contact info) ,  right section (form)  */
-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    padding: 48px 80px;
-    align-items: start;
-}
-
-/* ── Left section ── */
-.leftSection {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    align-items: flex-start;
-}
-
-/* Info card */
-.infoCard {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.infoCard h2 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--color-text-dark);
-    margin: 0;
-    line-height: 1.15;
-}
-
-.infoList {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-
-    background-color: var(--color-card);
-    border-radius: 10px;
-    padding: 16px 20px;
-    width: fit-content;
-}
-
-.infoList p {
-    font-size: 0.88rem;
-    color: var(--color-text-mid);
-    margin: 6px 0;
-}
-
-.infoLabel {
-    font-weight: 700;
-    color: var(--color-text-dark);
-    margin-right: 6px;
-}
-
-/* image */
-.image img {
-    width: 80%;
-    max-width: 300px;
-    height: auto;
-    object-fit: contain;
-}
-
-/* ── Right section ── */
-.rightSection {
-    display: flex;
-    flex-direction: column;
-}
-
-.formCard {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.formCard h2 {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--color-text-dark);
-    margin: 0 0 4px 0;
-}
-
-.formSubtitle {
-    font-size: 0.88rem;
-    color: var(--color-text-mid);
-    margin: 0 0 20px 0;
-    line-height: 1.5;
-}
-
-/* Form — flex column, each field in its own fieldGroup div 
-and each  fieldGroup div  is a column flexbox (label + input filed )*/
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-/* Each label + input pair */
-.fieldGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-/* Labels — same class  as auth pages */
+/* ── Labels ── */
 label {
     display: block;
     font-size: 0.72rem;
@@ -239,7 +138,7 @@ label {
     letter-spacing: 0.06em;
 }
 
-/* Input fields — same class as auth pages */
+/* ── Input Fields ── */
 .input_fields {
     width: 100%;
     padding: 11px 14px;
@@ -263,19 +162,13 @@ label {
     box-shadow: 0 0 0 3px rgba(200, 113, 74, 0.15);
 }
 
-/* Textarea specific */
-.textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-/* Feedback message */
+/* ── Feedback / Status Messages ── */
+/* Used by contact form and create blog form */
 .formFeedback {
     font-size: 0.85rem;
     font-weight: 600;
     margin: 0;
     min-height: 20px;
-    
 }
 
 .formFeedback.success {
@@ -286,8 +179,9 @@ label {
     color: #B03A2E;
 }
 
-/* Send button */
-.sendButton {
+/* ── Primary Button (full-width submit style) ── */
+/* Used by contact page (.sendButton) and auth pages (.button) */
+.btn-primary {
     width: 100%;
     padding: 13px;
     background-color: var(--color-primary);
@@ -298,24 +192,45 @@ label {
     font-weight: 700;
     font-family: 'Plus Jakarta Sans', sans-serif;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.15s ease;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
     box-shadow: 0 4px 14px rgba(200, 113, 74, 0.35);
 }
 
-.sendButton:hover {
+.btn-primary:hover {
     background-color: var(--color-primary-hover);
     transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(200, 113, 74, 0.40);
 }
 
-.sendButton:disabled {
+.btn-primary:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
 }
 
-/* 
-   FOOTER
- */
+/* ── Ghost / Outline Button ── */
+/* Used by profile page logout button */
+.btn-ghost {
+    padding: 10px 22px;
+    background-color: transparent;
+    border: 1.5px solid var(--color-border);
+    border-radius: 50px;
+    color: var(--color-text-dark);
+    font-size: 0.80rem;
+    font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+    border-color: var(--color-primary);
+    background-color: #FBF7F4;
+}
+
+/* ── FOOTER ── */
 footer {
     background-color: var(--color-bg);
     border-top: 1px solid var(--color-border);
@@ -330,27 +245,20 @@ footer p {
     margin: 0;
 }
 
-
-/* ANIMATIOM */
+/* ── Page Enter Animation ── */
+/* Reused across all pages */
 @keyframes pageEnter {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-
-
-
-
-/* 
-   RESPONSIVE
- */
+/* ── Responsive — Shared Breakpoints ── */
 
 /* Tablets */
 @media (max-width: 768px) {
@@ -361,39 +269,26 @@ footer p {
     .navList {
         gap: 18px;
     }
-
-    main {
-        grid-template-columns: 1fr;
-        padding: 32px 24px;
-        gap: 32px;
-    }
-
-    .image img {
-        width: 40%;
-    }
-
-
 }
 
 /* Small phones */
-@media (min-width: 361px) and (max-width: 768px) {
+@media (max-width: 480px) {
+    header {
+        padding: 0 16px;
+    }
+
     .navList {
         display: none;
-        /* hide nav links on very small screens */
+        /* hide nav links on small screens */
     }
 
-    main {
-        padding: 24px 16px;
+    .pfpContainer {
+        width: 48px;
+        height: 48px;
     }
 
-    .infoCard h2,
-    .formCard h2 {
-        font-size: 1.5rem;
+    .pfp {
+        width: 48px;
+        height: 48px;
     }
-
-.image img{
-     display: none; 
-    }
-
-
 }
