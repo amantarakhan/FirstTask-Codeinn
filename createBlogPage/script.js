@@ -10,14 +10,24 @@ window.addEventListener("load", function () {
     
     if (!blogForm) return;
 
+    const imageUrlInput = document.getElementById("imageUrl");
     const fileInput = document.getElementById("headerUpload");
     const fileNameDisplay = document.getElementById("fileName");
     const feedback = document.getElementById("formFeedback");
     const publishButton = blogForm.querySelector(".publishButton");
 
-    // ── Handle File Upload Display ──
-    fileInput.addEventListener("change", function (e) {
-        if (this.files && this.files[0]) {
+    // ── When user enters URL, clear file upload ──
+    imageUrlInput.addEventListener("input", function () {
+        if (this.value.trim()) { // If user typed something in URL field
+            fileInput.value = ""; // Clear any uploaded file
+            fileNameDisplay.textContent = ""; // Clear filename display
+        }
+    });
+
+    // ── When user uploads file, clear URL field ──
+    fileInput.addEventListener("change", function () {
+        if (this.files && this.files[0]) { // If user selected a file
+            imageUrlInput.value = ""; // Clear URL field
             fileNameDisplay.textContent = "✓ " + this.files[0].name;
             fileNameDisplay.style.color = "#4A7C59";
         } else {
@@ -25,8 +35,18 @@ window.addEventListener("load", function () {
         }
     });
 
+    // ── Convert uploaded file to base64 ──
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+
     // ── Handle Form Submission ──
-    blogForm.addEventListener("submit", function (e) { // Listen for when user clicks "Publish Story"
+    blogForm.addEventListener("submit", async function (e) { // Listen for when user clicks "Publish Story"
         e.preventDefault();
         e.stopPropagation();
 
@@ -39,12 +59,14 @@ window.addEventListener("load", function () {
         // ── Get form values using their IDs ──
         const blogTitle = document.getElementById("blogTitle").value.trim();
         const imageUrl = document.getElementById("imageUrl").value.trim();
+        const uploadedFile = fileInput.files[0]; // Get uploaded file if exists
         const category = document.getElementById("category").value;
         const content = document.getElementById("content").value.trim();
 
         // ── Validate required fields ──
-        if (!blogTitle || !category || !content) { // if (title is empty OR category is empty OR content is empty) 
-            feedback.textContent = "✗ Please fill in all required fields.";
+        // if (title is empty OR category is empty OR content is empty OR no image (URL or file))
+        if (!blogTitle || !category || !content || (!imageUrl && !uploadedFile)) {
+            feedback.textContent = "✗ Please fill in all required fields. Choose image: URL or Upload.";
             feedback.classList.add("error");
             publishButton.disabled = false;
             publishButton.textContent = "Publish Story";
@@ -52,10 +74,18 @@ window.addEventListener("load", function () {
         }
 
         try { // using try and a catch for simple error handling 
+            // ── Get image data - either from URL or uploaded file ──
+            let imageData = imageUrl; // Start with URL if provided
+            
+            // If file uploaded, convert it to base64
+            if (uploadedFile) {
+                imageData = await fileToBase64(uploadedFile);
+            }
+
             // ── Create blog object as required in the task ──
             const blog = {
                 title: blogTitle,
-                image: imageUrl,
+                image: imageData, // Either URL or base64 file data
                 category: category,
                 content: content,
                 createdAt: new Date().toISOString()

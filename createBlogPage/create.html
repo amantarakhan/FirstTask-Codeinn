@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Blog</title>
+    <title>Create New Blog - Briefly</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
     <div class="pageLayout">
-        <!-- HEADER - copy paste the one before -->
+        <!-- ── HEADER ── -->
         <header>
             <nav class="navBar">
                 <!-- Logo -->
@@ -18,9 +17,8 @@
                     <img class="logo-icon" src="../assests/logoWithoutName - Copy.png" alt="Briefly Logo">
                     <img class="logo-name" src="../assests/name.png" alt="Briefly">
                 </div>
-
                 <!-- Nav links -->
-
+                
                 <ul class="navList">
                     <li><a href="home.html">Home</a></li>
                     <li><a href="../Profile_UI/profile.html">Profile</a></li>
@@ -38,7 +36,7 @@
             </nav>
         </header>
 
-        <!--  MAIN // each input has label with the same id  -->
+        <!-- ── MAIN ── -->
         <main>
             <section class="createBlogSection">
                 <!-- Page Heading -->
@@ -49,32 +47,48 @@
 
                 <!-- Blog Form -->
                 <form class="blogForm" id="blogForm">
-
+                    
                     <!-- Blog Title -->
                     <div class="formGroup">
                         <label for="blogTitle" class="formLabel">Blog Title</label>
-                        <input type="text" id="blogTitle" class="formInput"
-                            placeholder="Enter an engaging title for your blog" required>
+                        <input 
+                            type="text" 
+                            id="blogTitle" 
+                            class="formInput" 
+                            placeholder="Enter an engaging title for your blog"
+                            required
+                        >
                     </div>
 
                     <!-- Image Section (URL or Upload) -->
                     <div class="imageSection">
-                        <label class="formLabel imageLabel">Image</label>
+                        <label class="formLabel imageLabel">Image <span class="requiredBadge">required</span></label>
+                        <p class="imageHint">Choose one: URL or Upload</p>
                         <div class="imageRow">
                             <!-- Image URL -->
                             <div class="formGroup imageUrlGroup">
                                 <span class="imageSubLabel">URL</span>
-                                <input type="url" id="imageUrl" class="formInput imageInput"
-                                    placeholder="Paste link here">
+                                <input 
+                                    type="url" 
+                                    id="imageUrl" 
+                                    class="formInput imageInput" 
+                                    placeholder="Paste link here"
+                                >
                             </div>
 
                             <!-- Upload Header (File input styled as button) -->
                             <div class="formGroup uploadGroup">
-                                <span class="imageSubLabel">Upload</span>
+                                <span class="imageSubLabel">Upload </span>
                                 <label for="headerUpload" class="fileUploadButton">
+         
                                     Choose File
                                 </label>
-                                <input type="file" id="headerUpload" class="fileInput" accept="image/*">
+                                <input 
+                                    type="file" 
+                                    id="headerUpload" 
+                                    class="fileInput" 
+                                    accept="image/*"
+                                >
                                 <span id="fileName" class="fileName"></span>
                             </div>
                         </div>
@@ -100,11 +114,16 @@
                     <!-- Content Textarea -->
                     <div class="formGroup">
                         <label for="content" class="formLabel">Content</label>
-                        <textarea id="content" class="formInput formTextarea"
-                            placeholder="Write your blog content here..." rows="8" required></textarea>
+                        <textarea 
+                            id="content" 
+                            class="formInput formTextarea" 
+                            placeholder="Write your blog content here..."
+                            rows="8"
+                            required
+                        ></textarea>
                     </div>
 
-                    <!-- Feedback message - handled in the js  -->
+                    <!-- Feedback message -->
                     <p id="formFeedback" class="formFeedback"></p>
 
                     <!-- Submit Button -->
