@@ -35,7 +35,8 @@ window.addEventListener("load", function () {
             contactForm
         )
 
-        // what will be written in the feedback paragraph in the html after pressing in the button -> the css handle the <p> color 
+        // what will be written in the feedback paragraph in the html after pressing in the button -> the css handle the <p> color
+    //  
         //success
         .then(function () {
             feedback.textContent = "✓ Message sent! We'll get back to you soon.";

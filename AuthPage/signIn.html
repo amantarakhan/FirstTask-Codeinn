@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up — Briefly</title>
+  <link rel="stylesheet" href="../style/auth.css" />
+
+    <!-- these 2 lines are for using the sweetAlert library -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+  <div class="pageContainer">
+
+    <!-- Left: Form -->
+    <div class="FormSection">
+      <div class="whole-card">
+
+        <!-- Logo -->
+        <div class="logo">
+          <img class="logo-icon" src="../assests/logoWithoutName - Copy.png" alt="Briefly logo icon">
+          <img class="logo-name" src="../assests/name.png" alt="Briefly">
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+          <h1>Join the Community</h1>
+          <p>Start your journey into the world of literature and design.</p>
+        </div>
+
+        <!-- Form -->
+        <form action="../contactPage/contact.html">
+
+          <div>
+            <label for="fullname">Full Name</label>
+            <input id="fullname" type="text" class="input_fields" placeholder="Aman tarakhan">
+          </div>
+
+          <div>
+            <label for="email">Email Address</label>
+            <input id="email" type="email" class="input_fields" placeholder="aman@example.com">
+          </div>
+
+          <div>
+            <label for="password">Create Password</label>
+            <input id="password" type="password" class="input_fields" placeholder="Min. 8 characters">
+          </div>
+
+          <div>
+            <label for="confirm-password">Confirm Password</label>
+            <input id="confirm-password" type="password" class="input_fields" placeholder="Min. 8 characters">
+          </div>
+
+          <div>
+            <button class="button" type="submit">Create Account</button>
+          </div>
+
+        </form>
+
+        <!-- OR divider -->
+        <div class="or-divider">
+          <hr>
+          <span>Or sign in with</span>
+          <hr>
+        </div>
+
+        <!-- Social buttons -->
+        <div class="social-buttons">
+          <a class="social-btn" href="#">Google</a>
+          <a class="social-btn" href="#">Apple</a>
+        </div>
+
+        <!-- Bottom note -->
+        <hr class="divider">
+        <p class="notes">
+          Already have an account? <a href="login.html" style="color: var(--color-link); font-weight: 600;">Log In</a>
+        </p>
+
+      </div>
+    </div>
+
+    <!-- Right: Image -->
+    <div class="imageSection">
+      <img src="../assests/signupImg.png" alt="Illustration">
+    </div>
+
+  </div>
+</body>
+<script src="script.js"></script>
+
+</html>

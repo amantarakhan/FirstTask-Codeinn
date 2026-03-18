@@ -130,8 +130,15 @@ window.addEventListener("load", function () {
             localStorage.setItem("blogs", JSON.stringify(blogs));
 
             // ── Success feedback ──
-            feedback.textContent = "✓ Blog published successfully! Your story is now live.";
-            feedback.classList.add("success");
+            // success — replace feedback lines with THIS (USING THE SWEET ALERT) 
+            Swal.fire({
+                icon: 'success',
+                title: 'Blog published!',
+                text: 'Your story is now live.',
+                confirmButtonColor: '#C8714A',
+                timer: 3000,
+                timerProgressBar: true
+            });
 
             // ── Clear form ──
             blogForm.reset();
@@ -140,8 +147,13 @@ window.addEventListener("load", function () {
 
         } catch (error) {
             console.error("Error publishing blog:", error);
-            feedback.textContent = "✗ Something went wrong. Please try again.";
-            feedback.classList.add("error");
+            // error — replace feedback lines with SAME AS SUCCESS (JUST DIFFERENT INFO INSIDE )
+            Swal.fire({
+                icon: 'error',
+                title: 'Could not publish',
+                text: 'Something went wrong. Please try again.',
+                confirmButtonColor: '#C8714A'
+            });
         }
 
         // ── Re-enable button ──
