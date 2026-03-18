@@ -5,6 +5,7 @@
     <title>Contact US </title>
     <link rel="stylesheet" href="contactStyle.css" />
 
+
     <!-- EmailJS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
@@ -12,6 +13,9 @@
             emailjs.init({ publicKey: "hGj2llhQaa2d41tld" }); /* GOT THE PUBLIC KEY FROM THE EmailJs */
         })();
     </script>
+
+
+
 </head>
 
 <body>
@@ -28,9 +32,10 @@
 
                 <!-- Nav links -->
                 <ul class="navList">
-                    <li><a href="home.html">Home</a></li> <!-- still not implemented -->
+                    <li><a href="home.html">Home</a></li>
                     <li><a href="../Profile_UI/profile.html">Profile</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="../contactPage/contact.html" class="active">Contact</a></li>
+                    <li><a href="../createBlogPage/create.html" >Create Blog</a></li>
                 </ul>
 
                 <!-- Profile picture -->
@@ -53,15 +58,15 @@
                     <div class="infoList">
                         <p>
                             <span class="infoLabel">Email</span>
-                            <a href="mailto:amantarakhan@gmail.com">amantarakhan@gmail.com</a>
+                            <a href="/cdn-cgi/l/email-protection#50313d313e243122313b38313e10373d31393c7e333f3d" style="text-decoration: none; color: #2B2118;"><span class="__cf_email__" data-cfemail="6f0e020e011b0e1d0e04070e012f08020e0603410c0002">[email&#160;protected]</span></a>
                         </p>
                         <p>
                             <span class="infoLabel">Phone</span>
-                            <a href="tel:0788355415">0788355415</a>
+                            <a href="tel:0788355415" style="text-decoration: none; color: #2B2118;" >0788355415</a>
                         </p>
                         <p>
                             <span class="infoLabel">Location : </span>
-                            <a href="https://maps.app.goo.gl/9Cp2yxEDzBCUUj6X7">Queen Rania St 362, Amman</a>
+                            <a href="https://maps.app.goo.gl/9Cp2yxEDzBCUUj6X7" style="text-decoration: none; color: #2B2118;" >Queen Rania St 362, Amman</a>
                         </p>
                     </div>
                 </div>
@@ -114,12 +119,4 @@
 
         <!-- ── Footer ── -->
         <footer>
-            <p>&copy; 2026 Blog Platform. All rights reserved.</p>
-        </footer>
-
-    </div>
-
-    <script src="script.js"></script>
-</body>
-
-</html>
+            <p>&copy;

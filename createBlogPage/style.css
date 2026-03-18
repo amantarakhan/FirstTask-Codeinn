@@ -1,0 +1,471 @@
+/* style.css - Create Blog Page */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Color Variables (same as before )  ── */
+:root {
+    --color-bg: #F5F0EB;
+    --color-card: #EDE8E1;
+    --color-form-bg: #E8E2D6;
+    --color-primary: #C8714A;
+    --color-primary-hover: #B05A35;
+    --color-text-dark: #2B2118;
+    --color-text-mid: #6B4F3A;
+    --color-text-light: #9C8070;
+    --color-border: #DDD0C5;
+    --color-shadow: rgba(43, 33, 24, 0.10);
+}
+
+/* ── Global Styles ── */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--color-text-dark);
+}
+
+/* ── Page Layout Grid ── */
+.pageLayout {
+    display: grid;
+    grid-template-rows: 64px 1fr 52px; /* same grid values as before */ 
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── HEADER all are the same - just copy paste it  */
+header {
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 48px;
+}
+
+.navBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+.logo-name {
+    height: 22px;
+    object-fit: contain;
+    margin-left: 2px;
+}
+
+/* Nav links */
+.navList {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navList a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-text-mid);
+    transition: color 0.2s ease;
+}
+
+.navList a:hover,
+.navList a.active {
+    color: var(--color-text-dark);
+    font-weight: 600;
+}
+
+/* Profile picture in nav */
+.pfpContainer {
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.pfpContainer a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.pfp {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+}
+
+/* ── MAIN here is different  */
+main {
+    display: flex; /* using flexbox to center the main (card) */ 
+    justify-content: center;
+    align-items: center;
+    padding: 40px 24px;
+}
+
+/* ── Create Blog Section (Centered Card the actual content ) ── */
+.createBlogSection {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--color-card);
+    border-radius: 16px;
+    padding: 56px 48px;
+    box-shadow: 0 8px 24px var(--color-shadow);
+    animation: pageEnter 0.6s ease-out 0.2s forwards;
+    opacity: 0;
+}
+
+/* ── Blog Heading ── */
+.blogHeading {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.blogHeading h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-text-dark);
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+}
+
+.blogHeading .subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-mid);
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+/* ── Form ── */
+.blogForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form Group */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Form Label */
+.formLabel {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Form Input (Text, URL, Select) */
+.formInput {
+    padding: 12px 14px;
+    background-color: var(--color-form-bg);
+    border: 1.5px solid var(--color-border);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--color-text-dark);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formInput::placeholder {
+    color: var(--color-text-light);
+}
+
+.formInput:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(200, 113, 74, 0.15);
+}
+
+/* Textarea */
+.formTextarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.6;
+}
+
+/* Select Dropdown */
+.formSelect {
+    appearance: none;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+/* ── Image Section ── */
+.imageSection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.imageLabel {
+    display: block;
+}
+
+.imageRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.imageUrlGroup,
+.uploadGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+}
+
+.imageSubLabel {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--color-text-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.imageInput {
+    padding: 12px 14px;
+}
+
+/* ── File Upload Button ── */
+.fileUploadButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background-color: var(--color-form-bg);
+    border: 2px dashed var(--color-border);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--color-text-mid);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.fileUploadButton:hover {
+    border-color: var(--color-primary);
+    background-color: #F0EAE0;
+    color: var(--color-primary);
+}
+
+/* Hidden file input */
+.fileInput {
+    display: none;
+}
+
+/* File name display */
+.fileName {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    font-weight: 400;
+    margin-top: 4px;
+    display: block;
+}
+
+/* ── Form Feedback Message ── */
+.formFeedback {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0;
+    min-height: 20px;
+    text-align: center;
+}
+
+.formFeedback.success {
+    color: #4A7C59;
+}
+
+.formFeedback.error {
+    color: #B03A2E;
+}
+
+/* ── Publish Button ── */
+.publishButton {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.96rem;
+    font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 14px rgba(200, 113, 74, 0.35);
+    margin-top: 8px;
+}
+
+.publishButton:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(200, 113, 74, 0.45);
+}
+
+.publishButton:active {
+    transform: translateY(0);
+}
+
+.publishButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── FOOTER ── */
+footer {
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer p {
+    font-size: 0.80rem;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+/* ── Animations ── */
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Responsive Design ── */
+
+/* Tablets */
+@media (max-width: 768px) {
+    header {
+        padding: 0 24px;
+    }
+
+    .navList {
+        gap: 18px;
+        font-size: 0.8rem;
+    }
+
+    .createBlogSection {
+        padding: 36px 28px;
+        border-radius: 12px;
+    }
+
+    .blogHeading h1 {
+        font-size: 2rem;
+    }
+
+    .formInput,
+    .fileUploadButton {
+        font-size: 0.88rem;
+        padding: 11px 12px;
+    }
+
+    .imageRow {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    header {
+        padding: 0 16px;
+    }
+
+    .navList {
+        display: none;
+    }
+
+    .pfpContainer {
+        width: 48px;
+        height: 48px;
+    }
+
+    .pfp {
+        width: 48px;
+        height: 48px;
+    }
+
+    main {
+        padding: 20px 16px;
+    }
+
+    .createBlogSection {
+        padding: 28px 20px;
+        border-radius: 12px;
+    }
+
+    .blogHeading h1 {
+        font-size: 1.5rem;
+    }
+
+    .blogHeading .subtitle {
+        font-size: 0.85rem;
+    }
+
+    .blogForm {
+        gap: 16px;
+    }
+
+    .formLabel {
+        font-size: 0.68rem;
+    }
+
+    .formInput,
+    .fileUploadButton {
+        font-size: 0.88rem;
+        padding: 10px 12px;
+    }
+
+    .formTextarea {
+        min-height: 100px;
+    }
+
+    .publishButton {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    .imageRow {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}

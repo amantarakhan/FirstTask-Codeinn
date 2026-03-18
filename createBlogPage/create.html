@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Blog</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="pageLayout">
+        <!-- HEADER - copy paste the one before -->
+        <header>
+            <nav class="navBar">
+                <!-- Logo -->
+                <div class="logo">
+                    <img class="logo-icon" src="../assests/logoWithoutName - Copy.png" alt="Briefly Logo">
+                    <img class="logo-name" src="../assests/name.png" alt="Briefly">
+                </div>
+
+                <!-- Nav links -->
+
+                <ul class="navList">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="../Profile_UI/profile.html">Profile</a></li>
+                    <li><a href="../contactPage/contact.html">Contact</a></li>
+                    <li><a href="../createBlogPage/create.html" class="active">Create Blog</a></li>
+                </ul>
+
+
+                <!-- Profile picture -->
+                <div class="pfpContainer">
+                    <a href="../Profile_UI/profile.html">
+                        <img id="navbarPfp" src="../assests/PFPplaceholder.png" class="pfp" alt="Profile">
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <!--  MAIN // each input has label with the same id  -->
+        <main>
+            <section class="createBlogSection">
+                <!-- Page Heading -->
+                <div class="blogHeading">
+                    <h1>Create New Blog</h1>
+                    <p class="subtitle">Share your thoughts with the world</p>
+                </div>
+
+                <!-- Blog Form -->
+                <form class="blogForm" id="blogForm">
+
+                    <!-- Blog Title -->
+                    <div class="formGroup">
+                        <label for="blogTitle" class="formLabel">Blog Title</label>
+                        <input type="text" id="blogTitle" class="formInput"
+                            placeholder="Enter an engaging title for your blog" required>
+                    </div>
+
+                    <!-- Image Section (URL or Upload) -->
+                    <div class="imageSection">
+                        <label class="formLabel imageLabel">Image</label>
+                        <div class="imageRow">
+                            <!-- Image URL -->
+                            <div class="formGroup imageUrlGroup">
+                                <span class="imageSubLabel">URL</span>
+                                <input type="url" id="imageUrl" class="formInput imageInput"
+                                    placeholder="Paste link here">
+                            </div>
+
+                            <!-- Upload Header (File input styled as button) -->
+                            <div class="formGroup uploadGroup">
+                                <span class="imageSubLabel">Upload</span>
+                                <label for="headerUpload" class="fileUploadButton">
+                                    Choose File
+                                </label>
+                                <input type="file" id="headerUpload" class="fileInput" accept="image/*">
+                                <span id="fileName" class="fileName"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Dropdown -->
+                    <div class="formGroup">
+                        <label for="category" class="formLabel">Category</label>
+                        <select id="category" class="formInput formSelect" required>
+                            <option value="">Select a category</option>
+                            <option value="technology">Technology</option>
+                            <option value="lifestyle">Lifestyle</option>
+                            <option value="travel">Travel</option>
+                            <option value="food">Food</option>
+                            <option value="business">Business</option>
+                            <option value="health">Health</option>
+                            <option value="education">Education</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Content Textarea -->
+                    <div class="formGroup">
+                        <label for="content" class="formLabel">Content</label>
+                        <textarea id="content" class="formInput formTextarea"
+                            placeholder="Write your blog content here..." rows="8" required></textarea>
+                    </div>
+
+                    <!-- Feedback message - handled in the js  -->
+                    <p id="formFeedback" class="formFeedback"></p>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="publishButton">Publish Story</button>
+
+                </form>
+            </section>
+        </main>
+
+        <!-- ── FOOTER ── -->
+        <footer>
+            <p>&copy; 2026 Blog Platform. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
