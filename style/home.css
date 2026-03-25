@@ -98,9 +98,11 @@ main {
 
 /*2. ABOUT US SECTION*/
 .aboutSection {
-  display: grid;
-  grid-template-columns: 1fr 2fr; /* 3fr (about us takes 1 and the other text takes the other 2 )*/ 
-  gap: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
   padding: 64px 80px;
   background-color: var(--color-bg);
   border-top: 1px solid var(--color-border);
@@ -114,12 +116,12 @@ main {
   line-height: 1.15;
 }
 
-.aboutRight p { /* the paraagraph */ 
+.aboutRight p { /* the paragraph */ 
   font-size: 0.92rem;
   color: var(--color-text-mid);
   line-height: 1.8;
-  margin: 0;
-  max-width: 560px;
+  margin: 0 auto;
+  max-width: 600px;
 }
 
 /* 

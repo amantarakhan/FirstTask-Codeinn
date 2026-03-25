@@ -86,6 +86,7 @@ function goToBlog(index) {
     //?id= part of the URL is a Query Parameter. It's a way to "carry" data from one page to another without using a database
 }
 
+
 // ── 7. Render LATEST UPDATES (2 tall cards) 
 // Builder for your "Latest Updates" section
 
@@ -164,7 +165,7 @@ function renderBlogCards(blogs) {
         seeAllWrap.style.display = "none";
         return;
     }
-
+  
     //Resetting the Visibility
     grid.style.display = "";
     empty.style.display = "none";
@@ -204,7 +205,8 @@ window.addEventListener("load", function () { // The Event Listener - ensures th
         //Translating the Data (Parsing)
         const parsed = JSON.parse(raw);
         if (raw) {// Checks if anything was actually found in storage.
-            if (Array.isArray(parsed)) blogs = parsed; //takes the "string" version of your data and turns it back into a real JavaScript list (Array).
+            if (Array.isArray(parsed))
+            blogs = parsed; //takes the "string" version of your data and turns it back into a real JavaScript list (Array).
         }
     } catch (e) {
         console.error("Error reading blogs from localStorage:", e);

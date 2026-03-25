@@ -1,11 +1,11 @@
-// ── 1. Load saved profile picture ──
+// ── 1. Load saved profile picture from localStorage
 const savedPfp = localStorage.getItem("userPFP");
 if (savedPfp) {
     const navPfp = document.getElementById("navbarPfp");
     if (navPfp) navPfp.src = savedPfp;
 }
 
-// ── 2. Helpers ──
+// ── 2. Category → CSS class mapping ──
 const CATEGORY_CLASS = {
     technology:    "cat-technology",
     lifestyle:     "cat-lifestyle",
@@ -21,29 +21,35 @@ const CATEGORY_CLASS = {
     other:         "cat-other",
 };
 
+// Takes a category string, lowercases it, looks it up in the mapping object.
+// Falls back to "cat-default" if not found.
 function getCatClass(category) {
     return CATEGORY_CLASS[(category || "").toLowerCase()] || "cat-default";
 }
 
+// ── 3. Format date → "Mar 18, 2026" ──
 function formatDate(isoString) {
     if (!isoString) return "";
     const d = new Date(isoString);
     return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
+// ── 4. Truncate text to max characters ──
 function truncate(text, max = 100) {
     if (!text) return "";
     return text.length > max ? text.slice(0, max).trimEnd() + "…" : text;
 }
 
+// ── 5. Navigate to single blog page ──
 function goToBlog(index) {
     window.location.href = `../singleblogPage/singleBlog.html?id=${index}`;
 }
 
-// ── 3. Build a single story card ──
+// ── 6. Build a single story card ──
 function buildStoryCard(blog, realIndex) {
     const catClass = getCatClass(blog.category);
 
+    // If there is an image URL, create an <img> tag. If not, create a placeholder div.
     const imgHtml = blog.image
         ? `<img src="${blog.image}" alt="${blog.title}" class="storyCardImg"
                onerror="this.outerHTML='<div class=\\'storyCardImgPlaceholder\\'>📄</div>'">`
@@ -64,102 +70,45 @@ function buildStoryCard(blog, realIndex) {
         </a>`;
 }
 
-// ── 4. Pagination state ──
-const CARDS_PER_PAGE = 6;
-let currentPage = 0;
-let allBlogs = [];
+// ── 7. Render all story cards ──
+function renderAllBlogs(blogs) {
+    const grid  = document.getElementById("storiesGrid");
+    const empty = document.getElementById("allBlogsEmpty");
 
-function totalPages() {
-    return Math.max(1, Math.ceil(allBlogs.length / CARDS_PER_PAGE));
-}
-
-// ── 5. Render current page ──
-function renderPage() {
-    const grid         = document.getElementById("storiesGrid");
-    const empty        = document.getElementById("allBlogsEmpty");
-    const paginationRow = document.getElementById("paginationRow");
-
-    // No blogs at all → show empty state
-    if (allBlogs.length === 0) {
-        grid.style.display          = "none";
-        empty.style.display         = "flex";
-        paginationRow.style.display = "none";
+    if (!blogs.length) {
+        // Empty state: hide the grid, show the "no blogs" message
+        grid.style.display  = "none";
+        empty.style.display = "flex";
         return;
     }
 
-    // Has blogs → show grid, hide empty
+    // Has blogs: show the grid, hide the empty message
     grid.style.display  = "grid";
     empty.style.display = "none";
 
-    // Newest first
-    const reversed = [...allBlogs].reverse();
+    // Newest first — reverse a copy so the original array stays intact
+    const reversed = [...blogs].reverse();
 
-    const start = currentPage * CARDS_PER_PAGE;
-    const slice = reversed.slice(start, start + CARDS_PER_PAGE);
-
-    grid.innerHTML = slice.map((blog, i) => {
-        // Map back to original array index so goToBlog works correctly
-        const reversedIdx = start + i;
-        const realIndex   = allBlogs.length - 1 - reversedIdx;
+    grid.innerHTML = reversed.map((blog, i) => {
+        // Because the array is reversed, the real localStorage index goes backwards
+        const realIndex = blogs.length - 1 - i;
         return buildStoryCard(blog, realIndex);
     }).join("");
-
-    // Pagination
-    const pages = totalPages();
-    if (pages > 1) {
-        paginationRow.style.display = "flex";
-        renderPagination(pages);
-    } else {
-        paginationRow.style.display = "none";
-    }
 }
 
-// ── 6. Render pagination controls ──
-function renderPagination(pages) {
-    const prevBtn  = document.getElementById("prevBtn");
-    const nextBtn  = document.getElementById("nextBtn");
-    const dotsWrap = document.getElementById("pageDots");
-
-    prevBtn.disabled = currentPage === 0;
-    nextBtn.disabled = currentPage === pages - 1;
-
-    dotsWrap.innerHTML = Array.from({ length: pages }, (_, i) =>
-        `<button class="pageDot ${i === currentPage ? "active" : ""}"
-                 onclick="goToPage(${i})" aria-label="Page ${i + 1}"></button>`
-    ).join("");
-}
-
-// ── 7. Page navigation ──
-function goToPage(page) {
-    currentPage = page;
-    renderPage();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-// ── 8. Init — everything wired up AFTER the DOM is ready ──
+// ── 8. Init — wait for the full page to load ──
 window.addEventListener("load", function () {
+    let allBlogs = [];
 
-    // Wire up pagination buttons safely inside load
-    document.getElementById("prevBtn").addEventListener("click", () => {
-        if (currentPage > 0) goToPage(currentPage - 1);
-    });
-
-    document.getElementById("nextBtn").addEventListener("click", () => {
-        if (currentPage < totalPages() - 1) goToPage(currentPage + 1);
-    });
-
-    // Read blogs from localStorage
     try {
         const raw = localStorage.getItem("blogs");
         if (raw) {
             const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) {
-                allBlogs = parsed;
-            }
+            if (Array.isArray(parsed)) allBlogs = parsed;
         }
     } catch (e) {
         console.error("Error reading blogs from localStorage:", e);
     }
 
-    renderPage();
+    renderAllBlogs(allBlogs);
 });

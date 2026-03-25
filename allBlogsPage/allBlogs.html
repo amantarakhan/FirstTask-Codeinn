@@ -3,15 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- for the responsiveness -->
-    <title>All Stories — Briefly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Stories — Briefly</title> 
     <link rel="stylesheet" href="../style/allBlogs.css" />
 </head>
 
 <body>
     <div class="pageLayout">
 
-        <!--  HEADER c- reuse   -->
+        <!-- ── HEADER ── -->
         <header>
             <nav class="navBar">
                 <div class="logo">
@@ -19,10 +19,10 @@
                     <img class="logo-name" src="../assests/name.png" alt="Briefly">
                 </div>
                 <ul class="navList">
-                    <li><a href="../homePage/home.html">Home</a></li>
+                    <li><a href="../homePage/home.html" class="active">Home</a></li>
                     <li><a href="../ProfilePage/profile.html">Profile</a></li>
                     <li><a href="../contactPage/contact.html">Contact</a></li>
-                    <li><a href="../createBlogPage/create.html" class="active">Create Blog</a></li>
+                    <li><a href="../createBlogPage/create.html" >Create Blog</a></li>
                 </ul>
                 <div class="pfpContainer">
                     <a href="../ProfilePage/profile.html">
@@ -41,26 +41,33 @@
                 <p class="allStoriesSubtitle">Archiving the Future</p>
             </section>
 
-            <!-- Stories Grid -->
+            <!-- Stories Grid Section -->
             <section class="allStoriesSection">
 
-                <!-- Empty state - this is will dispaly if there is nothing to show -->
+                <!-- Empty state -->
                 <div class="emptyState" id="allBlogsEmpty" style="display:none;">
                     <div class="emptyIcon">📭</div>
-                    <p>No blogs published yet.<br><a href="../createBlogPage/create.html">Be the first to create a story!</a></p>
+                    <p>No blogs published yet.<br>
+                        <a href="../createBlogPage/create.html">Be the first to create a story!</a>
+                    </p>
                 </div>
 
-                <!-- Grid -> this div will dispaly if there actually blogs to show -> using the loop in the js -->
-                <div class="storiesGrid" id="storiesGrid">
-                    <!-- will be filled by the loop in the JS -->
-                </div>
+                <!-- Cards Grid -->
+                <div class="storiesGrid" id="storiesGrid"></div>
+
+
+
             </section>
+
         </main>
-        <!--  FOOTER - reuse  -->
+
+        <!-- ── FOOTER ── -->
         <footer>
             <p>&copy; 2026 Blog Platform. All rights reserved.</p>
         </footer>
+
     </div>
+
     <script src="../allBlogsPage/script.js"></script>
 </body>
 </html>

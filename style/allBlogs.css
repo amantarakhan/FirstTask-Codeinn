@@ -2,25 +2,30 @@
 
 @import url('../style/global.css'); 
 
-/* ── Page layout ── */
+/* ══════════════════════════════
+   PAGE LAYOUT
+══════════════════════════════ */
 .pageLayout {
-    grid-template-rows: 64px 1fr 52px; /* same as before */ 
-    animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* animation for the entire page when its open */ 
+    grid-template-rows: 64px 1fr 52px;
+    animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 main {
     display: flex;
-    flex-direction: column; /* the main section (the actual blogs -> column ) */ 
+    flex-direction: column;
+    background-color: var(--color-bg);
 }
 
-/* 1. HERO BANNER */
+/* ══════════════════════════════
+   1. HERO BANNER
+══════════════════════════════ */
 .allStoriesHero {
     text-align: center;
     padding: 72px 80px 48px;
     background-color: var(--color-bg);
 }
 
-.allStoriesTitle { /* Explore All Stories */ 
+.allStoriesTitle {
     font-size: clamp(2.4rem, 5vw, 3.8rem);
     font-weight: 800;
     color: var(--color-text-dark);
@@ -29,7 +34,7 @@ main {
     letter-spacing: -0.02em;
 }
 
-.allStoriesSubtitle { /* Archiving the Future */ 
+.allStoriesSubtitle {
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.18em;
@@ -38,7 +43,9 @@ main {
     margin: 0;
 }
 
-/* 2. STORIES GRID  (3 columns = 3 cards )*/
+/* ══════════════════════════════
+   2. STORIES GRID (3 columns)
+══════════════════════════════ */
 .allStoriesSection {
     padding: 8px 64px 72px;
     background-color: var(--color-bg);
@@ -46,58 +53,60 @@ main {
 
 .storiesGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3fr one for each card */ 
-    gap: 32px 28px; /* 32px (Row Gap) - 28px (Column Gap) */ 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* matches home page blogsGrid gap */
 }
 
-/* ── Story Card ── */
+/* ── Story Card — matches .blogCard from home.css ── */
 .storyCard {
-    display: flex;
-    flex-direction: column; /* the image - title - substitle - contect -> all order in a vertical way */ 
-    text-decoration: none;
-    cursor: pointer; /* when the cursor be on the card it will be pointer -> beter UX */
-    border-radius: 0;          /* no rounded corners */
+    border-radius: 14px;
     overflow: hidden;
-    transition: transform 0.25s ease;
+    background-color: var(--color-card);
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 2px 12px var(--color-shadow);
 }
 
 .storyCard:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 36px rgba(43, 33, 24, 0.15);
 }
 
-/* Image area */
+/* Image wrapper — matches .blogCardImgWrapper */
 .storyCardImgWrapper {
     position: relative;
-    width: 100%; /* 100% of the card width */ 
-    height: 210px;
-    overflow: hidden; /* If any content inside this box is too big to fit, clip it and hide the extra parts.*/ 
-    border-radius: 6px;
-    background-color: #d6c9bb;
-    margin-bottom: 14px;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
 .storyCardImg {
     width: 100%;
-    height: 100%; /* of the storyCardImgWrapper which is 210px  */ 
+    height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.35s ease;
 }
 
 .storyCard:hover .storyCardImg {
-    transform: scale(1.04);
+    transform: scale(1.05);
 }
 
 .storyCardImgPlaceholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #2B2118 0%, #6B4F3A 50%, #C8714A 100%);
+    background: linear-gradient(135deg, #2B2118 0%, #6B4F3A 50%, #9C8070 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
-/* Category badge — top-left on image */
+/* Category badge on image — matches .blogCardCatBadge */
 .storyCardBadge {
     position: absolute;
     top: 10px;
@@ -105,13 +114,14 @@ main {
     font-size: 0.60rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.07em;
-    padding: 3px 10px;
+    letter-spacing: 0.06em;
+    padding: 3px 9px;
     border-radius: 20px;
 }
 
-/* Card text body */
+/* Card text body — matches .blogCardBody */
 .storyCardBody {
+    padding: 16px 18px 18px;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -119,13 +129,16 @@ main {
 }
 
 .storyCardDate {
-    font-size: 0.72rem;
+    font-size: 0.70rem;
     color: var(--color-text-light);
     margin: 0;
+    margin-top: auto;
+    padding-top: 10px;
+    order: 3; /* push date to bottom like .blogCardDate */
 }
 
 .storyCardTitle {
-    font-size: 1.05rem;
+    font-size: 0.92rem;
     font-weight: 700;
     color: var(--color-text-dark);
     margin: 0;
@@ -134,111 +147,42 @@ main {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    order: 1;
 }
 
 .storyCardExcerpt {
-    font-size: 0.80rem;
+    font-size: 0.78rem;
     color: var(--color-text-mid);
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.55;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    order: 2;
 }
 
+/* Hide "Read Feature →" to keep cards identical to home page */
 .storyCardReadMore {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--color-text-dark);
-    margin-top: 6px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    transition: gap 0.2s ease, color 0.2s ease;
-}
-
-.storyCard:hover .storyCardReadMore {
-    gap: 8px;
-    color: var(--color-primary);
+    display: none;
 }
 
 /* ══════════════════════════════
-   3. PAGINATION
+   CATEGORY COLORS
 ══════════════════════════════ */
-.paginationRow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 56px;
-}
-
-.pageBtn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1.5px solid var(--color-border);
-    background-color: var(--color-card);
-    color: var(--color-text-dark);
-    font-size: 0.9rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: border-color 0.2s, background-color 0.2s;
-}
-
-.pageBtn:hover:not(:disabled) {
-    border-color: var(--color-primary);
-    background-color: var(--color-primary);
-    color: #fff;
-}
-
-.pageBtn:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-}
-
-.pageDots {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.pageDot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--color-border);
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-}
-
-.pageDot.active {
-    background-color: var(--color-text-dark);
-    transform: scale(1.25);
-}
-
-/* ══════════════════════════════
-   CATEGORY COLORS (reused)
-══════════════════════════════ */
-.cat-technology   { background-color: #DBEAFE; color: #1D4ED8; }
-.cat-lifestyle    { background-color: #FCE7F3; color: #9D174D; }
-.cat-travel       { background-color: #D1FAE5; color: #065F46; }
-.cat-food         { background-color: #FEF3C7; color: #92400E; }
-.cat-business     { background-color: #EDE9FE; color: #5B21B6; }
-.cat-health       { background-color: #ECFDF5; color: #047857; }
-.cat-education    { background-color: #FFF7ED; color: #9A3412; }
-.cat-entertainment{ background-color: #FEE2E2; color: #991B1B; }
-.cat-finance      { background-color: #FEF9C3; color: #854D0E; }
-.cat-games        { background-color: #EFF6FF; color: #1E40AF; }
-.cat-training     { background-color: #F0FDF4; color: #166534; }
-.cat-other        { background-color: #F3F4F6; color: #374151; }
-.cat-default      { background-color: #F3F4F6; color: #374151; }
+.cat-technology    { background-color: #DBEAFE; color: #1D4ED8; }
+.cat-lifestyle     { background-color: #FCE7F3; color: #9D174D; }
+.cat-travel        { background-color: #D1FAE5; color: #065F46; }
+.cat-food          { background-color: #FEF3C7; color: #92400E; }
+.cat-business      { background-color: #EDE9FE; color: #5B21B6; }
+.cat-health        { background-color: #ECFDF5; color: #047857; }
+.cat-education     { background-color: #FFF7ED; color: #9A3412; }
+.cat-entertainment { background-color: #FEE2E2; color: #991B1B; }
+.cat-finance       { background-color: #FEF9C3; color: #854D0E; }
+.cat-games         { background-color: #EFF6FF; color: #1E40AF; }
+.cat-training      { background-color: #F0FDF4; color: #166534; }
+.cat-other         { background-color: #F3F4F6; color: #374151; }
+.cat-default       { background-color: #F3F4F6; color: #374151; }
 
 /* ══════════════════════════════
    EMPTY STATE
@@ -248,7 +192,7 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    padding: 72px 24px;
+    padding: 80px 24px;
     text-align: center;
 }
 
@@ -278,8 +222,13 @@ main {
     .storiesGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
+@media (max-width: 768px) {
+    .allStoriesSection { padding-left: 24px; padding-right: 24px; }
+    .allStoriesHero    { padding: 48px 24px 32px; }
+    .storiesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 640px) {
     .allStoriesSection { padding-left: 20px; padding-right: 20px; }
-    .allStoriesHero    { padding: 48px 20px 32px; }
     .storiesGrid { grid-template-columns: 1fr; }
 }
