@@ -1,0 +1,285 @@
+/* allBlogs.css — All Stories Page */
+
+@import url('../style/global.css'); 
+
+/* ── Page layout ── */
+.pageLayout {
+    grid-template-rows: 64px 1fr 52px; /* same as before */ 
+    animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* animation for the entire page when its open */ 
+}
+
+main {
+    display: flex;
+    flex-direction: column; /* the main section (the actual blogs -> column ) */ 
+}
+
+/* 1. HERO BANNER */
+.allStoriesHero {
+    text-align: center;
+    padding: 72px 80px 48px;
+    background-color: var(--color-bg);
+}
+
+.allStoriesTitle { /* Explore All Stories */ 
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800;
+    color: var(--color-text-dark);
+    margin: 0 0 10px 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.allStoriesSubtitle { /* Archiving the Future */ 
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+/* 2. STORIES GRID  (3 columns = 3 cards )*/
+.allStoriesSection {
+    padding: 8px 64px 72px;
+    background-color: var(--color-bg);
+}
+
+.storiesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3fr one for each card */ 
+    gap: 32px 28px; /* 32px (Row Gap) - 28px (Column Gap) */ 
+}
+
+/* ── Story Card ── */
+.storyCard {
+    display: flex;
+    flex-direction: column; /* the image - title - substitle - contect -> all order in a vertical way */ 
+    text-decoration: none;
+    cursor: pointer; /* when the cursor be on the card it will be pointer -> beter UX */
+    border-radius: 0;          /* no rounded corners */
+    overflow: hidden;
+    transition: transform 0.25s ease;
+}
+
+.storyCard:hover {
+    transform: translateY(-4px);
+}
+
+/* Image area */
+.storyCardImgWrapper {
+    position: relative;
+    width: 100%; /* 100% of the card width */ 
+    height: 210px;
+    overflow: hidden; /* If any content inside this box is too big to fit, clip it and hide the extra parts.*/ 
+    border-radius: 6px;
+    background-color: #d6c9bb;
+    margin-bottom: 14px;
+}
+
+.storyCardImg {
+    width: 100%;
+    height: 100%; /* of the storyCardImgWrapper which is 210px  */ 
+    object-fit: cover;
+    display: block;
+}
+
+.storyCard:hover .storyCardImg {
+    transform: scale(1.04);
+}
+
+.storyCardImgPlaceholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2B2118 0%, #6B4F3A 50%, #C8714A 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+/* Category badge — top-left on image */
+.storyCardBadge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0.60rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+/* Card text body */
+.storyCardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.storyCardDate {
+    font-size: 0.72rem;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+.storyCardTitle {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin: 0;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.storyCardExcerpt {
+    font-size: 0.80rem;
+    color: var(--color-text-mid);
+    margin: 0;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.storyCardReadMore {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-top: 6px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.storyCard:hover .storyCardReadMore {
+    gap: 8px;
+    color: var(--color-primary);
+}
+
+/* ══════════════════════════════
+   3. PAGINATION
+══════════════════════════════ */
+.paginationRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 56px;
+}
+
+.pageBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    background-color: var(--color-card);
+    color: var(--color-text-dark);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.pageBtn:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.pageBtn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.pageDots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pageDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-border);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.pageDot.active {
+    background-color: var(--color-text-dark);
+    transform: scale(1.25);
+}
+
+/* ══════════════════════════════
+   CATEGORY COLORS (reused)
+══════════════════════════════ */
+.cat-technology   { background-color: #DBEAFE; color: #1D4ED8; }
+.cat-lifestyle    { background-color: #FCE7F3; color: #9D174D; }
+.cat-travel       { background-color: #D1FAE5; color: #065F46; }
+.cat-food         { background-color: #FEF3C7; color: #92400E; }
+.cat-business     { background-color: #EDE9FE; color: #5B21B6; }
+.cat-health       { background-color: #ECFDF5; color: #047857; }
+.cat-education    { background-color: #FFF7ED; color: #9A3412; }
+.cat-entertainment{ background-color: #FEE2E2; color: #991B1B; }
+.cat-finance      { background-color: #FEF9C3; color: #854D0E; }
+.cat-games        { background-color: #EFF6FF; color: #1E40AF; }
+.cat-training     { background-color: #F0FDF4; color: #166534; }
+.cat-other        { background-color: #F3F4F6; color: #374151; }
+.cat-default      { background-color: #F3F4F6; color: #374151; }
+
+/* ══════════════════════════════
+   EMPTY STATE
+══════════════════════════════ */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 72px 24px;
+    text-align: center;
+}
+
+.emptyIcon { font-size: 3rem; }
+
+.emptyState p {
+    font-size: 0.95rem;
+    color: var(--color-text-mid);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.emptyState a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.emptyState a:hover { text-decoration: underline; }
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 1024px) {
+    .allStoriesSection { padding-left: 40px; padding-right: 40px; }
+    .allStoriesHero    { padding-left: 40px; padding-right: 40px; }
+    .storiesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .allStoriesSection { padding-left: 20px; padding-right: 20px; }
+    .allStoriesHero    { padding: 48px 20px 32px; }
+    .storiesGrid { grid-template-columns: 1fr; }
+}

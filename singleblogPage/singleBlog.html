@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — Briefly</title>
+    <link rel="stylesheet" href="../style/singleBlog.css" />
+    
+</head>
+
+<body>
+    <div class="pageLayout">
+
+        <!-- ── HEADER ── -->
+        <header>
+            <nav class="navBar">
+                <div class="logo">
+                    <img class="logo-icon" src="../assests/logoWithoutName - Copy.png" alt="Briefly logo icon">
+                    <img class="logo-name" src="../assests/name.png" alt="Briefly">
+                </div>
+                <ul class="navList">
+                    <li><a href="../homePage/home.html">Home</a></li>
+                    <li><a href="../ProfilePage/profile.html">Profile</a></li>
+                    <li><a href="../contactPage/contact.html">Contact</a></li>
+                    <li><a href="../createBlogPage/create.html" class="active">Create Blog</a></li>
+                </ul>
+                <div class="pfpContainer">
+                    <a href="../ProfilePage/profile.html">
+                        <img id="navbarPfp" src="../assests/PFPplaceholder.png" class="pfp" alt="Profile">
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ── MAIN ── -->
+        <main id="singleMain">
+
+            <!-- NOT FOUND STATE -->
+            <div class="emptyState" id="notFound" style="display:none;">
+                <div class="emptyIcon">🔍</div>
+                <p>Blog not found.<br><a href="../homePage/home.html">Go back home</a></p>
+            </div>
+
+            <!-- ── BLOG ARTICLE (injected by JS) ── -->
+            <article id="singleBlogArticle" style="display:none;">
+
+                <!-- Full-width hero image -->
+                <div class="singleHeroImg" id="singleHeroImg">
+                    <!-- image or gradient placeholder injected by JS -->
+                </div>
+
+                <!-- Article body wrapper -->
+                <div class="singleBody">
+
+                    <!-- Back link -->
+                    <a href="javascript:history.back()" class="backLink">← Back</a>
+
+                    <!-- Title -->
+                    <h1 class="singleTitle" id="singleTitle"></h1>
+
+                    <!-- Meta row: category pill + "Published on date" -->
+                    <div class="singleMeta">
+                        <span class="singleCategoryPill" id="singleCategory"></span>
+                        <span class="singleMetaText" id="singleDate"></span>
+                    </div>
+
+                    <!-- Divider -->
+                    <hr class="singleDivider">
+
+                    <!-- Full content -->
+                    <div class="singleContent" id="singleContent">
+                        <!-- paragraphs injected by JS -->
+                    </div>
+
+                    <!-- Divider -->
+                    <hr class="singleDivider">
+
+                    <!-- Bottom category tags -->
+                    <div class="singleTags" id="singleTags">
+                        <!-- injected by JS -->
+                    </div>
+
+                </div>
+            </article>
+
+        </main>
+
+        <!-- ── FOOTER ── -->
+        <footer>
+            <p>&copy; 2026 Blog Platform. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script src="../singleblogPage/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home — Briefly</title>
+    <link rel="stylesheet" href="../style/home.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- for the sweet alert library-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="pageLayout">
+
+        <!-- ── HEADER ── -->
+        <header>
+            <nav class="navBar">
+                <!-- Logo -->
+                <div class="logo">
+                    <img class="logo-icon" src="../assests/logoWithoutName - Copy.png" alt="Briefly logo icon">
+                    <img class="logo-name" src="../assests/name.png" alt="Briefly">
+                </div>
+
+                <!-- Nav links -->
+                <ul class="navList">
+                    <li><a href="home.html" class="active" >Home</a></li>
+                    <li><a href="../ProfilePage/profile.html">Profile</a></li>
+                    <li><a href="../contactPage/contact.html">Contact</a></li>
+                    <li><a href="../createBlogPage/create.html" class="active">Create Blog</a></li>
+                </ul>
+
+
+                <!-- Profile picture -->
+                <div class="pfpContainer">
+                    <a href="../ProfilePage/profile.html">
+                        <img id="navbarPfp" src="../assests/PFPplaceholder.png" class="pfp" alt="Profile">
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <!--  MAIN - the thing that actually changed  -->
+        <main>
+
+            <!-- ── 1. HERO SECTION ── -->
+            <section class="hero">
+                <div class="heroContent">
+                    <h1 class="heroTitle">Your Daily<br><em>insight</em></h1>
+                    <p class="heroSubtitle">
+                        Curating the intersection of software and structure, human-centric design, and digital
+                        mindfulness.
+                    </p>
+                    <a href="../createBlogPage/create.html" class="heroBtn">create yours now →</a>
+                </div>
+                <div class="heroImage">
+                    <img src="../assests/heroIllustration.png" 
+                        class="heroIllustrationImg" >
+                </div>
+            </section>
+
+            <!-- ── 2. ABOUT US SECTION ── -->
+            <section class="aboutSection">
+                <div class="aboutLeft">
+                    <h2>About Us</h2>
+                </div>
+                <div class="aboutRight">
+                    <p>
+                        Welcome to Briefly 
+                        a platform created to share ideas, knowledge, and inspiration across a variety of topics.
+                        Our content is designed for everyone—whether you're looking to learn something new, stay updated, or simply explore interesting perspectives.
+                        We aim to present information in a clear, engaging, and accessible way, making complex topics easier to understand. 
+                        No matter your background or interests, we hope you find valuable insights and an enjoyable reading experience here.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3. LATEST UPDATES (2 featured cards) ── -->
+            <section class="latestSection">
+                <h2 class="sectionTitle">Latest Updates</h2>
+                <div class="latestGrid" id="latestGrid">
+                    <!-- filled by JS from the local storage  -- if its not empty display this div with the data from the js -->
+                </div>
+                <div class="emptyState" id="latestEmpty" style="display:none;"> <!-- if empty display this div -->
+                    <div class="emptyIcon">📭</div>
+                    <p>No blogs yet. <a href="../createBlogPage/create.html">Create the first one!</a></p>
+                </div>
+            </section>
+
+            <!--  4. EXPLORE TOPICS  -->
+            <section class="topicsSection">
+                <h2 class="sectionTitle">Explore Topics</h2>
+                <div class="topicsRow">
+                    <div class="topicPill" data-cat="finance">
+                        <span class="topicIcon">💰</span>
+                        <span>Finance</span>
+                    </div>
+                    <div class="topicPill" data-cat="lifestyle">
+                        <span class="topicIcon">✏️</span>
+                        <span>Lifestyle</span>
+                    </div>
+                    <div class="topicPill" data-cat="food">
+                        <span class="topicIcon">🍕</span>
+                        <span>Food</span>
+                    </div>
+                    <div class="topicPill" data-cat="business">
+                        <span class="topicIcon">📊</span>
+                        <span>Business</span>
+                    </div>
+                    <div class="topicPill" data-cat="games">
+                        <span class="topicIcon">🎮</span>
+                        <span>Games</span>
+                    </div>
+                    <div class="topicPill" data-cat="training">
+                        <span class="topicIcon">🏋️</span>
+                        <span>Training</span>
+                    </div>
+                </div>
+            </section>
+
+            <!--  5. BLOG CARDS GRID (4 cards)  -->
+            <section class="blogsSection">
+                <h2 class="sectionTitle">Latest Updates</h2>
+                <div class="blogsGrid" id="blogsGrid">
+                    <!-- filled by JS -->
+                </div>
+                <div class="emptyState" id="blogsEmpty" style="display:none;">
+                    <div class="emptyIcon">📭</div>
+                    <p>No blogs available yet.<br><a href="../createBlogPage/create.html">Be the first to publish a
+                            story!</a></p>
+                </div>
+                <div class="seeAllWrapper" id="seeAllWrapper" style="display:none;">
+                    <a href="../allBlogsPage/allBlogs.html" class="seeAllBtn">See All →</a>
+                </div>
+            </section>
+
+        </main>
+
+        <!--  FOOTER  -->
+        <footer>
+            <p>&copy; 2026 Blog Platform. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script src="../homePage/script.js"></script>
+</body>
+
+</html>
