@@ -1,13 +1,31 @@
-// ── Load saved profile picture from localStorage - didnt change it - same as before ──
-const savedPfp = localStorage.getItem("userPFP"); // saved in local storage 
+// ── 0. Auth guard — show popup and redirect if not logged in ──
+if (localStorage.getItem("loggedIn") !== "true") {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Login Required',
+        text: 'You need to be logged in to create a blog.',
+        confirmButtonText: 'Go to Login',
+        confirmButtonColor: '#C8714A',
+        allowOutsideClick: false,
+        allowEscapeKey: false
+    }).then(function () {
+        window.location.href = '../AuthPage/login.html';
+    });
+}
+
+// ── Load saved profile picture from localStorage ──
+const savedPfp = localStorage.getItem("userPFP");
 if (savedPfp) {
     document.getElementById("navbarPfp").src = savedPfp;
 }
 
-
-
 // ── Handle Create Blog Form ──
 window.addEventListener("load", function () {
+
+    // get the year dynamically for footer
+    document.getElementById("footerYear").textContent = new Date().getFullYear();
+
+    
     const blogForm = document.getElementById("blogForm");
 
     if (!blogForm) return;
@@ -20,16 +38,16 @@ window.addEventListener("load", function () {
 
     // ── When user enters URL, clear file upload ──
     imageUrlInput.addEventListener("input", function () {
-        if (this.value.trim()) { // If user typed something in URL field
-            fileInput.value = ""; // Clear any uploaded file
-            fileNameDisplay.textContent = ""; // Clear filename display
+        if (this.value.trim()) {
+            fileInput.value = "";
+            fileNameDisplay.textContent = "";
         }
     });
 
     // ── When user uploads file, clear URL field ──
     fileInput.addEventListener("change", function () {
-        if (this.files && this.files[0]) { // If user selected a file
-            imageUrlInput.value = ""; // Clear URL field
+        if (this.files && this.files[0]) {
+            imageUrlInput.value = "";
             fileNameDisplay.textContent = "✓ " + this.files[0].name;
             fileNameDisplay.style.color = "#4A7C59";
         } else {
@@ -48,34 +66,21 @@ window.addEventListener("load", function () {
     }
 
     // ── Handle Form Submission ──
-    blogForm.addEventListener("submit", async function (e) { // Listen for when user clicks "Publish Story"
-        //stops the browser’s default behavior for that event. like you are saying : Hey browser, don’t do what you normally do for this action. 
-        // normally this is the dedult behavior when a user submit a form : The page reloads -> Data is sent to the server 
-        // when we stop this behaviour -> the page wont reload and the data can be handled using JavaScript
+    blogForm.addEventListener("submit", async function (e) {
         e.preventDefault();
-
-        //stops the event from bubbling up (or down) the DOM tree.
-        // In JavaScript, events bubble up from child → parent. 
-        // means =  Don’t trigger parent elements (it only controls Who else gets notified that this event happened?) 
-        // used here so the container never knows the form was submitted.
-        // It’s only useful when:There are parent elements listening to the same event
         e.stopPropagation();
 
-        // Disable button while processing
         publishButton.disabled = true;
         publishButton.textContent = "Publishing...";
         feedback.textContent = "";
         feedback.className = "formFeedback";
 
-        // ── Get form values using their IDs ──
-        const blogTitle = document.getElementById("blogTitle").value.trim();
-        const imageUrl = document.getElementById("imageUrl").value.trim();
-        const uploadedFile = fileInput.files[0]; // Get uploaded file if exists
-        const category = document.getElementById("category").value;
-        const content = document.getElementById("content").value.trim();
+        const blogTitle    = document.getElementById("blogTitle").value.trim();
+        const imageUrl     = document.getElementById("imageUrl").value.trim();
+        const uploadedFile = fileInput.files[0];
+        const category     = document.getElementById("category").value;
+        const content      = document.getElementById("content").value.trim();
 
-        // ── Validate required fields ──
-        // if (title is empty OR category is empty OR content is empty OR no image (URL or file))
         if (!blogTitle || !category || !content || (!imageUrl && !uploadedFile)) {
             feedback.textContent = "✗ Please fill in all required fields. Choose image: URL or Upload.";
             feedback.classList.add("error");
@@ -84,53 +89,37 @@ window.addEventListener("load", function () {
             return;
         }
 
-        try { // using try and a catch for simple error handling 
-            // ── Get image data - either from URL or uploaded file ──
-            let imageData = imageUrl; // Start with URL if provided
+        try {
+            let imageData = imageUrl;
 
-            // If file uploaded, convert it to base64
             if (uploadedFile) {
-                imageData = await fileToBase64(uploadedFile); //way to convert any data into a text format 
-
-                // base64 : 
-                // /Base64 lets you: turn a file into a string so you can store it, send it, or display it easily 
-                // the uploaded file is a binary data so in order to save it into the local storage we convert it into text using the base64 
+                imageData = await fileToBase64(uploadedFile);
             }
 
-            // ── Create blog object as required in the task ──
             const blog = {
                 title: blogTitle,
-                image: imageData, // Either URL or base64 file data
+                image: imageData,
                 category: category,
                 content: content,
                 createdAt: new Date().toISOString()
             };
 
-            // ── Get existing blogs from localStorage (if any) ──
-            let blogs = []; // Create empty array
-            const existingBlogs = localStorage.getItem("blogs"); // Get saved blogs from storage
+            let blogs = [];
+            const existingBlogs = localStorage.getItem("blogs");
 
-            if (existingBlogs) { // Check if blogs exist
+            if (existingBlogs) {
                 try {
-                    blogs = JSON.parse(existingBlogs); // Convert text → JavaScript array
-                    // Ensure it's an array
-                    if (!Array.isArray(blogs)) { // Verify it's actually an array
-                        blogs = []; // get it 
-                    }
-                } catch (e) { // if any error happen use empty array
+                    blogs = JSON.parse(existingBlogs);
+                    if (!Array.isArray(blogs)) blogs = [];
+                } catch (e) {
                     console.error("Error parsing existing blogs:", e);
-                    blogs = []; // this is the empty array 
+                    blogs = [];
                 }
             }
 
-            // ── Push new blog to array ──
             blogs.push(blog);
-
-            // ── Save updated array back to localStorage ──
             localStorage.setItem("blogs", JSON.stringify(blogs));
 
-            // ── Success feedback ──
-            // success — replace feedback lines with THIS (USING THE SWEET ALERT) 
             Swal.fire({
                 icon: 'success',
                 title: 'Blog published!',
@@ -140,14 +129,11 @@ window.addEventListener("load", function () {
                 timerProgressBar: true
             });
 
-            // ── Clear form ──
             blogForm.reset();
             fileNameDisplay.textContent = "";
 
-
         } catch (error) {
             console.error("Error publishing blog:", error);
-            // error — replace feedback lines with SAME AS SUCCESS (JUST DIFFERENT INFO INSIDE )
             Swal.fire({
                 icon: 'error',
                 title: 'Could not publish',
@@ -156,7 +142,6 @@ window.addEventListener("load", function () {
             });
         }
 
-        // ── Re-enable button ──
         publishButton.disabled = false;
         publishButton.textContent = "Publish Story";
     });

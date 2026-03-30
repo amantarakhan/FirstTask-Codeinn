@@ -11,6 +11,10 @@ if (savedPfp) {
 // wait for the full page to load before looking for the form
 window.addEventListener("load", function () {
 
+    // get the year dynamically for footer
+    document.getElementById("footerYear").textContent = new Date().getFullYear();
+
+
     const contactForm = document.getElementById("contactForm");
 
     // if we are not on the contact page, stop here

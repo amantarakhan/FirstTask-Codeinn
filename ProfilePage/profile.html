@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
     <link rel="stylesheet" href="../style/profile.css" />
+    <style>
+        /* Bio editable hint */
+        #bioSection { position: relative; }
+        .bioHint {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--color-primary, #C8714A);
+            opacity: 0;
+            margin-top: 4px;
+            transition: opacity 0.2s ease;
+        }
+        #bioSection:hover .bioHint { opacity: 1; }
+    </style>
       <!-- these 2 lines are for using the sweetAlert library -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -59,8 +72,9 @@
             </div>
 
             <!-- Bio — grid column 1, row 3 -->
-            <div class="UserBio">
-                <p>No bio yet.</p>
+            <div class="UserBio" id="bioSection" onclick="editBio()" title="Click to edit bio" style="cursor:pointer;">
+                <p id="bioText">No bio yet.</p>
+                <span class="bioHint">✏️ Click to edit</span>
             </div>
 
             <!-- Blog count — grid column 1, row 4 -->
@@ -92,7 +106,7 @@
 
         <!-- ── FOOTER ── -->
         <footer>
-            <p>&copy; 2026 Blog Platform. All rights reserved.</p>
+            <p>&copy; <span id="footerYear"></span> Blog Platform. All rights reserved.</p>
         </footer>
 
     </div>
