@@ -25,7 +25,7 @@ window.addEventListener("load", function () {
     // get the year dynamically for footer
     document.getElementById("footerYear").textContent = new Date().getFullYear();
 
-    
+
     const blogForm = document.getElementById("blogForm");
 
     if (!blogForm) return;
@@ -75,17 +75,84 @@ window.addEventListener("load", function () {
         feedback.textContent = "";
         feedback.className = "formFeedback";
 
-        const blogTitle    = document.getElementById("blogTitle").value.trim();
-        const imageUrl     = document.getElementById("imageUrl").value.trim();
+        const blogTitle = document.getElementById("blogTitle").value.trim();
+        const imageUrl = document.getElementById("imageUrl").value.trim();
         const uploadedFile = fileInput.files[0];
-        const category     = document.getElementById("category").value;
-        const content      = document.getElementById("content").value.trim();
+        const category = document.getElementById("category").value;
+        const content = document.getElementById("content").value.trim();
 
-        if (!blogTitle || !category || !content || (!imageUrl && !uploadedFile)) {
+        // after we got all the inputs 
+        // define the regex 
+
+        const titleRegex = /^[a-zA-Z0-9][a-zA-Z0-9\s.,!?'-]{4,99}$/;
+        const imageRegex = /^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
+        const contentRegex = /^[\s\S]{50,5000}$/;
+
+        if (!blogTitle || !category || !content || (!imageUrl && !uploadedFile)) { // same as before -> empty check 
             feedback.textContent = "✗ Please fill in all required fields. Choose image: URL or Upload.";
             feedback.classList.add("error");
             publishButton.disabled = false;
             publishButton.textContent = "Publish Story";
+            return;
+        }
+
+        // these are new -> validation usinf regex 
+        if (!titleRegex.test(blogTitle)) { // same -> test function
+            e.preventDefault(); // same as before -> dont send the credential to the server 
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Title',
+                text: blogTitle.length < 5
+                    ? 'Title is too short. Must be at least 5 characters.'
+                    : blogTitle.length > 100
+                        ? 'Title is too long. Must be under 100 characters.'
+                        : "Title must start with a letter or number, and only contain basic punctuation (. , ! ? ' -)",
+                confirmButtonColor: '#C8714A'
+            });
+            return;
+        }
+
+        // 3) Image validation  
+        if (uploadedFile) {
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+            if (!allowedTypes.includes(uploadedFile.type)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid File Type',
+                    text: 'Uploaded file must be an image (.jpg, .jpeg, .png, .gif, .webp, or .svg).',
+                    confirmButtonColor: '#C8714A'
+                });
+                publishButton.disabled = false;
+                publishButton.textContent = "Publish Story";
+                return;
+            }
+        } else if (imageUrl) {
+            const imageRegex = /^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
+            if (!imageRegex.test(imageUrl)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Image URL',
+                    text: !imageUrl.startsWith('http')
+                        ? 'URL must start with http:// or https://'
+                        : 'URL must point to a valid image file (.jpg, .jpeg, .png, .gif, .webp, or .svg)',
+                    confirmButtonColor: '#C8714A'
+                });
+                publishButton.disabled = false;
+                publishButton.textContent = "Publish Story";
+                return;
+            }
+        }
+
+        if (!contentRegex.test(content)) { // same -> test function
+            e.preventDefault(); // same as before -> dont send the credential to the server 
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Content',
+                text: content.length < 50
+                    ? `Content is too short. Write at least 50 characters. (You have ${content.length}.)`
+                    : `Content is too long. Maximum is 5000 characters. (You have ${content.length}.)`,
+                confirmButtonColor: '#C8714A'
+            });
             return;
         }
 

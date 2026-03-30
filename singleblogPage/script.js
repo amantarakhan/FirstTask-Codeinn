@@ -156,7 +156,7 @@ function detectCategory(text) {
 
 
 
-// ── 7. Init ──
+// ── 7. Init - replaced with the new one -> the one that get the data from the API not the local storage ──
 window.addEventListener("load", async function getData() {
     const id = getBlogIdFromURL();
 
