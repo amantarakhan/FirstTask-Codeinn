@@ -11,8 +11,7 @@ if (loginForm) {
         // here i will implemt the new way for input validation -> using regex 
         // declare the regex -> got them from google 
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // valid email 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // one lowecase , one uppercase , one symbol , one number , lenght at least 8 char
-
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
 
 
         if (!email || !password) { // here we check if anyone is empty -> then using the sweet alert to alert the user - same as before 
@@ -88,7 +87,7 @@ if (signupForm) {
         // defining the regex 
         // ── Regexes ──
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const passwordRegex = /^.{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
         const nameRegex = /^[a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+$/;
         const phoneRegex = /^(07[789]\d{7}|(\+9627[789]\d{7}))$/;
 
