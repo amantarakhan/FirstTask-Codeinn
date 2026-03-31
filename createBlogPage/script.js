@@ -25,7 +25,6 @@ window.addEventListener("load", function () {
     // get the year dynamically for footer
     document.getElementById("footerYear").textContent = new Date().getFullYear();
 
-
     const blogForm = document.getElementById("blogForm");
 
     if (!blogForm) return;
@@ -65,6 +64,40 @@ window.addEventListener("load", function () {
         });
     }
 
+    // ✅ ── Live Validation Function (FIX) ──
+    function validateFormLive() {
+        const blogTitle = document.getElementById("blogTitle").value.trim();
+        const imageUrl = document.getElementById("imageUrl").value.trim();
+        const uploadedFile = fileInput.files[0];
+        const category = document.getElementById("category").value;
+        const content = document.getElementById("content").value.trim();
+
+        const titleRegex = /^[a-zA-Z0-9][a-zA-Z0-9\s.,!?'-]{4,99}$/;
+        const contentRegex = /^[\s\S]{50,5000}$/;
+
+        const isValid =
+            blogTitle &&
+            category &&
+            content &&
+            (imageUrl || uploadedFile) &&
+            titleRegex.test(blogTitle) &&
+            contentRegex.test(content);
+
+        publishButton.disabled = !isValid;
+    }
+
+    // ✅ ── Attach live validation to inputs (FIX) ──
+    [
+        document.getElementById("blogTitle"),
+        imageUrlInput,
+        document.getElementById("category"),
+        document.getElementById("content"),
+        fileInput
+    ].forEach(input => {
+        input.addEventListener("input", validateFormLive);
+        input.addEventListener("change", validateFormLive);
+    });
+
     // ── Handle Form Submission ──
     blogForm.addEventListener("submit", async function (e) {
         e.preventDefault();
@@ -88,7 +121,7 @@ window.addEventListener("load", function () {
         const imageRegex = /^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
         const contentRegex = /^[\s\S]{50,5000}$/;
 
-        if (!blogTitle || !category || !content || (!imageUrl && !uploadedFile)) { // same as before -> empty check 
+        if (!blogTitle || !category || !content || (!imageUrl && !uploadedFile)) {
             feedback.textContent = "✗ Please fill in all required fields. Choose image: URL or Upload.";
             feedback.classList.add("error");
             publishButton.disabled = false;
@@ -96,9 +129,7 @@ window.addEventListener("load", function () {
             return;
         }
 
-        // these are new -> validation usinf regex 
-        if (!titleRegex.test(blogTitle)) { // same -> test function
-            e.preventDefault(); // same as before -> dont send the credential to the server 
+        if (!titleRegex.test(blogTitle)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Invalid Title',
@@ -109,6 +140,8 @@ window.addEventListener("load", function () {
                         : "Title must start with a letter or number, and only contain basic punctuation (. , ! ? ' -)",
                 confirmButtonColor: '#C8714A'
             });
+            publishButton.disabled = false; // ✅ FIX
+            publishButton.textContent = "Publish Story"; // ✅ FIX
             return;
         }
 
@@ -127,7 +160,6 @@ window.addEventListener("load", function () {
                 return;
             }
         } else if (imageUrl) {
-            const imageRegex = /^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i;
             if (!imageRegex.test(imageUrl)) {
                 Swal.fire({
                     icon: 'error',
@@ -143,8 +175,7 @@ window.addEventListener("load", function () {
             }
         }
 
-        if (!contentRegex.test(content)) { // same -> test function
-            e.preventDefault(); // same as before -> dont send the credential to the server 
+        if (!contentRegex.test(content)) {
             Swal.fire({
                 icon: 'error',
                 title: 'Invalid Content',
@@ -153,6 +184,8 @@ window.addEventListener("load", function () {
                     : `Content is too long. Maximum is 5000 characters. (You have ${content.length}.)`,
                 confirmButtonColor: '#C8714A'
             });
+            publishButton.disabled = false; // ✅ FIX
+            publishButton.textContent = "Publish Story"; // ✅ FIX
             return;
         }
 
@@ -212,4 +245,7 @@ window.addEventListener("load", function () {
         publishButton.disabled = false;
         publishButton.textContent = "Publish Story";
     });
+
+    // ✅ Initialize button state
+    validateFormLive();
 });

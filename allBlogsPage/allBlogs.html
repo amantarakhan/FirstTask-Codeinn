@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Stories — Briefly</title> 
     <link rel="stylesheet" href="../style/allBlogs.css" />
+    <!-- this is for the icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 
 <body>
@@ -37,13 +39,52 @@
         <!-- ── MAIN ── -->
         <main>
 
-            <!-- Hero Banner -->
+            <!-- 1. Hero Banner -->
             <section class="allStoriesHero">
                 <h1 class="allStoriesTitle">Explore All Stories</h1>
                 <p class="allStoriesSubtitle">Archiving the Future</p>
             </section>
 
-            <!-- Stories Grid Section -->
+            <!-- 2. SEARCH & FILTER BAR -->
+            <!-- sits between the hero and the grid so the user can narrow results before browsing -->
+            <section class="searchFilterSection">
+
+                <!-- Search input with icon on the left -->
+                <div class="searchWrapper">
+                    <i class="fa-solid fa-magnifying-glass searchIcon"></i>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="searchInput"
+                        placeholder="Search stories by title or keyword…"
+                    />
+                    <!-- Clear (✕) button — shown by JS when the input has text -->
+                    <button class="searchClearBtn" id="searchClearBtn" style="display:none;" aria-label="Clear search">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Category filter pills — "All" is active by default -->
+                <!-- JS reads data-cat to filter the blogs array -->
+                <div class="filterRow" id="filterRow">
+                    <button class="filterPill active" data-cat="all">All</button>
+                    <button class="filterPill" data-cat="finance">Finance</button>
+                    <button class="filterPill" data-cat="lifestyle">Lifestyle</button>
+                    <button class="filterPill" data-cat="food">Food</button>
+                    <button class="filterPill" data-cat="business">Business</button>
+                    <button class="filterPill" data-cat="games">Games</button>
+                    <button class="filterPill" data-cat="training">Training</button>
+                    <button class="filterPill" data-cat="technology">Technology</button>
+                    <button class="filterPill" data-cat="travel">Travel</button>
+                    <button class="filterPill" data-cat="health">Health</button>
+                    <button class="filterPill" data-cat="education">Education</button>
+                    <button class="filterPill" data-cat="entertainment">Entertainment</button>
+                    <button class="filterPill" data-cat="other">Other</button>
+                </div>
+
+            </section>
+
+            <!-- 3. Stories Grid Section -->
             <section class="allStoriesSection">
 
                 <!-- Empty state -->
@@ -56,8 +97,6 @@
 
                 <!-- Cards Grid -->
                 <div class="storiesGrid" id="storiesGrid"></div>
-
-
 
             </section>
 

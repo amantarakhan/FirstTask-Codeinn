@@ -44,7 +44,128 @@ main {
 }
 
 /* ══════════════════════════════
-   2. STORIES GRID (3 columns)
+   2. SEARCH & FILTER SECTION
+   sits between the hero and the stories grid
+══════════════════════════════ */
+.searchFilterSection {
+    padding: 0 64px 36px; /* top-0 so it flows naturally from the hero, sides match .allStoriesSection */
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ── Search bar wrapper (input + icons inside) ── */
+.searchWrapper {
+    position: relative;         /* so the icon and clear-btn can be positioned inside */
+    width: 100%;
+    max-width: 100%;           /* cap width so it doesn't stretch edge-to-edge on wide screens */
+}
+
+/* Magnifying-glass icon — sits on the left inside the input */
+.searchIcon {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    pointer-events: none;       /* clicking the icon still focuses the input */
+}
+
+/* The actual text input */
+.searchInput {
+    width: 100%;
+    padding: 12px 44px 12px 44px; /* left room for icon, right room for clear btn */
+    border: 1.5px solid var(--color-border);
+    border-radius: 10px;
+    background-color: var(--color-card);
+    font-size: 0.88rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--color-text-dark);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;     /* padding doesn't overflow the wrapper */
+}
+
+.searchInput::placeholder {
+    color: var(--color-text-light);
+}
+
+/* Focus state — highlight with the brand colour */
+.searchInput:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(200, 113, 74, 0.12);
+}
+
+/* ✕ Clear button inside the input on the right — shown by JS when there is text */
+.searchClearBtn {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease;
+}
+
+.searchClearBtn:hover {
+    color: var(--color-text-dark);
+}
+
+/* ── Category filter pills row ── */
+.filterRow {
+    display: flex;
+    flex-wrap: wrap;    /* wraps to a new line on narrow screens */
+    gap: 8px;
+}
+
+/* Individual filter pill (<button> elements) */
+.filterPill {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1.5px solid var(--color-border);
+    background-color: var(--color-card);
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--color-text-mid);
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease,
+                color 0.2s ease, transform 0.15s ease;
+    white-space: nowrap; /* text never wraps inside the pill */
+}
+
+.filterPill:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: #FBF7F4;
+    transform: translateY(-1px);
+}
+
+/* Active state — filled with brand colour, toggled by JS when a pill is selected */
+.filterPill.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
+.filterPill.active:hover {
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* ══════════════════════════════
+   3. STORIES GRID (3 columns)
 ══════════════════════════════ */
 .allStoriesSection {
     padding: 8px 64px 72px;
@@ -219,16 +340,37 @@ main {
 @media (max-width: 1024px) {
     .allStoriesSection { padding-left: 40px; padding-right: 40px; }
     .allStoriesHero    { padding-left: 40px; padding-right: 40px; }
+    .searchFilterSection { padding-left: 40px; padding-right: 40px; }
     .storiesGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
     .allStoriesSection { padding-left: 24px; padding-right: 24px; }
     .allStoriesHero    { padding: 48px 24px 32px; }
+    .searchFilterSection { padding-left: 24px; padding-right: 24px; }
     .storiesGrid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Let the search bar go full-width on tablet */
+    .searchWrapper { max-width: 100%; }
 }
 
 @media (max-width: 640px) {
     .allStoriesSection { padding-left: 20px; padding-right: 20px; }
+    .searchFilterSection { padding-left: 20px; padding-right: 20px; }
     .storiesGrid { grid-template-columns: 1fr; }
+
+    /* Filter pills scroll horizontally instead of wrapping on very small screens */
+    .filterRow {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;         /* space for the scrollbar */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Style the scrollbar subtly */
+    .filterRow::-webkit-scrollbar { height: 3px; }
+    .filterRow::-webkit-scrollbar-thumb {
+        background-color: var(--color-border);
+        border-radius: 4px;
+    }
 }
