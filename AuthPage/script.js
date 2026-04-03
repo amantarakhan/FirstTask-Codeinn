@@ -11,7 +11,7 @@ if (loginForm) {
         // here i will implemt the new way for input validation -> using regex 
         // declare the regex -> got them from google 
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // valid email 
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
 
 
         if (!email || !password) { // here we check if anyone is empty -> then using the sweet alert to alert the user - same as before 
@@ -64,9 +64,20 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
         //     return;
         // }
 
-        // Mark user as logged in
+        // all validations passed — prevent the form from submitting normally
+        e.preventDefault();
 
+        // save login state and email
         localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("userEmail", email);
+
+        // redirect: admin goes to dashboard, everyone else goes to home
+        const ADMIN_EMAIL = "amantarakhan@gmail.com";
+        if (email === ADMIN_EMAIL) { // checks if the email is the admin email -> go to the adminDash page 
+            window.location.href = "../adminDash/adminDash.html";
+        } else {
+            window.location.href = "../homePage/home.html"; // any other email will be direct it to the home page 
+        }
     });
 }
 

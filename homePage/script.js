@@ -1,5 +1,5 @@
 // ── 1. Load saved profile picture from localStorage
-const savedPfp = localStorage.getItem("userPFP");
+const savedPfp = localStorage.getItem("userPFP_" + (localStorage.getItem("userEmail") || ""));
 if (savedPfp) {
     document.getElementById("navbarPfp").src = savedPfp;
 }
@@ -141,8 +141,11 @@ window.addEventListener("load", function () {
 
     try {
         const raw    = localStorage.getItem("blogs");
-        const parsed = JSON.parse(raw);
-        if (raw && Array.isArray(parsed)) blogs = parsed;
+        const allBlogs = JSON.parse(raw);
+        if (raw && Array.isArray(allBlogs)) {
+            const approvedBlogs = allBlogs.filter(blog => blog.isApproved);
+            blogs = approvedBlogs;
+        }
     } catch (e) {
         console.error("Error reading blogs from localStorage:", e);
     }

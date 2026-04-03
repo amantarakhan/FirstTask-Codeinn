@@ -1,6 +1,6 @@
 // ── Contact Form Script ──
 // ── 1. Load saved profile picture from localStorage ──
-const savedPfp = localStorage.getItem("userPFP");
+const savedPfp = localStorage.getItem("userPFP_" + (localStorage.getItem("userEmail") || ""));
 if (savedPfp) {
     const navPfp = document.getElementById("navbarPfp");
     if (navPfp) navPfp.src = savedPfp;

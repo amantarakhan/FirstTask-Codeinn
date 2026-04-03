@@ -14,7 +14,7 @@ if (localStorage.getItem("loggedIn") !== "true") {
 }
 
 // ── Load saved profile picture from localStorage ──
-const savedPfp = localStorage.getItem("userPFP");
+const savedPfp = localStorage.getItem("userPFP_" + (localStorage.getItem("userEmail") || ""));
 if (savedPfp) {
     document.getElementById("navbarPfp").src = savedPfp;
 }
@@ -34,6 +34,46 @@ window.addEventListener("load", function () {
     const fileNameDisplay = document.getElementById("fileName");
     const feedback = document.getElementById("formFeedback");
     const publishButton = blogForm.querySelector(".publishButton");
+
+    // ── Check if we are in edit mode (came from profile edit button) -> i add this so if the user press edit -> direct him here with the alredy inputed data
+    const urlParams = new URLSearchParams(window.location.search);
+    const editIndex = urlParams.has("editIndex") ? parseInt(urlParams.get("editIndex")) : null;
+    const isEditMode = editIndex !== null;
+
+    // tracks whether the blog already has an image (used in edit mode validation)
+    let existingImageInEditMode = false;
+
+    if (isEditMode) {
+        // load the existing blog data into the form
+        let allBlogs = [];
+        try {
+            const raw = localStorage.getItem("blogs");
+            if (raw) allBlogs = JSON.parse(raw);
+        } catch (e) {}
+
+        const blogToEdit = allBlogs[editIndex];
+        if (blogToEdit) {
+            document.getElementById("blogTitle").value = blogToEdit.title || "";
+            document.getElementById("category").value  = blogToEdit.category || "";
+            document.getElementById("content").value   = blogToEdit.content || "";
+
+            // if the image is a URL (not base64), put it in the URL field
+            if (blogToEdit.image && !blogToEdit.image.startsWith("data:")) {
+                imageUrlInput.value = blogToEdit.image;
+            }
+
+            // if the image is base64 (uploaded file), the URL field stays empty
+            // but the image still exists — mark it so validation doesn't block the button
+            if (blogToEdit.image) {
+                existingImageInEditMode = true;
+            }
+
+            // switch UI to edit mode
+            document.querySelector(".blogHeading h1").textContent = "Edit Blog";
+            document.querySelector(".blogHeading .subtitle").textContent = "Update your story";
+            publishButton.textContent = "Update Story";
+        }
+    }
 
     // ── When user enters URL, clear file upload ──
     imageUrlInput.addEventListener("input", function () {
@@ -79,7 +119,7 @@ window.addEventListener("load", function () {
             blogTitle &&
             category &&
             content &&
-            (imageUrl || uploadedFile) &&
+            (imageUrl || uploadedFile || existingImageInEditMode) &&
             titleRegex.test(blogTitle) &&
             contentRegex.test(content);
 
@@ -104,7 +144,7 @@ window.addEventListener("load", function () {
         e.stopPropagation();
 
         publishButton.disabled = true;
-        publishButton.textContent = "Publishing...";
+        publishButton.textContent = isEditMode ? "Updating..." : "Publishing...";
         feedback.textContent = "";
         feedback.className = "formFeedback";
 
@@ -125,7 +165,7 @@ window.addEventListener("load", function () {
             feedback.textContent = "✗ Please fill in all required fields. Choose image: URL or Upload.";
             feedback.classList.add("error");
             publishButton.disabled = false;
-            publishButton.textContent = "Publish Story";
+            publishButton.textContent = isEditMode ? "Update Story" : "Publish Story";
             return;
         }
 
@@ -141,7 +181,7 @@ window.addEventListener("load", function () {
                 confirmButtonColor: '#C8714A'
             });
             publishButton.disabled = false; // ✅ FIX
-            publishButton.textContent = "Publish Story"; // ✅ FIX
+            publishButton.textContent = isEditMode ? "Update Story" : "Publish Story"; // ✅ FIX
             return;
         }
 
@@ -156,7 +196,7 @@ window.addEventListener("load", function () {
                     confirmButtonColor: '#C8714A'
                 });
                 publishButton.disabled = false;
-                publishButton.textContent = "Publish Story";
+                publishButton.textContent = isEditMode ? "Update Story" : "Publish Story";
                 return;
             }
         } else if (imageUrl) {
@@ -170,7 +210,7 @@ window.addEventListener("load", function () {
                     confirmButtonColor: '#C8714A'
                 });
                 publishButton.disabled = false;
-                publishButton.textContent = "Publish Story";
+                publishButton.textContent = isEditMode ? "Update Story" : "Publish Story";
                 return;
             }
         }
@@ -185,7 +225,7 @@ window.addEventListener("load", function () {
                 confirmButtonColor: '#C8714A'
             });
             publishButton.disabled = false; // ✅ FIX
-            publishButton.textContent = "Publish Story"; // ✅ FIX
+            publishButton.textContent = isEditMode ? "Update Story" : "Publish Story"; // ✅ FIX
             return;
         }
 
@@ -196,41 +236,60 @@ window.addEventListener("load", function () {
                 imageData = await fileToBase64(uploadedFile);
             }
 
-            const blog = {
-                title: blogTitle,
-                image: imageData,
-                category: category,
-                content: content,
-                createdAt: new Date().toISOString()
-            };
-
             let blogs = [];
-            const existingBlogs = localStorage.getItem("blogs");
-
-            if (existingBlogs) {
-                try {
-                    blogs = JSON.parse(existingBlogs);
-                    if (!Array.isArray(blogs)) blogs = [];
-                } catch (e) {
-                    console.error("Error parsing existing blogs:", e);
-                    blogs = [];
+            try {
+                const raw = localStorage.getItem("blogs");
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed)) blogs = parsed;
                 }
+            } catch (e) {
+                console.error("Error parsing existing blogs:", e);
             }
 
-            blogs.push(blog);
+            if (isEditMode) {
+                // preserve original authorEmail, createdAt, comments, and isApproved
+                const original = blogs[editIndex] || {};
+                blogs[editIndex] = {
+                    ...original,
+                    title: blogTitle,
+                    image: imageData,
+                    category: category,
+                    content: content,
+                    isApproved: false, // reset to pending after edit
+                };
+            } else {
+                const blog = {
+                    title: blogTitle,
+                    image: imageData,
+                    authorEmail: localStorage.getItem("userEmail"),
+                    category: category,
+                    content: content,
+                    createdAt: new Date().toISOString(),
+                    isApproved: false,
+                    // each comment: { id: Date.now(), user: "Username", text: "...", date: new Date().toISOString() }
+                    comments: [],
+                };
+                blogs.push(blog);
+            }
+
             localStorage.setItem("blogs", JSON.stringify(blogs));
 
             Swal.fire({
                 icon: 'success',
-                title: 'Blog published!',
-                text: 'Your story is now live.',
+                title: isEditMode ? 'Blog updated!' : 'Blog published!',
+                text: isEditMode ? 'Your changes have been saved.' : 'Your story is now live.',
                 confirmButtonColor: '#C8714A',
                 timer: 3000,
                 timerProgressBar: true
+            }).then(function () {
+                if (isEditMode) window.location.href = '../ProfilePage/profile.html';
             });
 
-            blogForm.reset();
-            fileNameDisplay.textContent = "";
+            if (!isEditMode) {
+                blogForm.reset();
+                fileNameDisplay.textContent = "";
+            }
 
         } catch (error) {
             console.error("Error publishing blog:", error);
@@ -243,7 +302,7 @@ window.addEventListener("load", function () {
         }
 
         publishButton.disabled = false;
-        publishButton.textContent = "Publish Story";
+        publishButton.textContent = isEditMode ? "Update Story" : "Publish Story";
     });
 
     // ✅ Initialize button state

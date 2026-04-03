@@ -55,8 +55,43 @@ main {
     gap: 20px;
 }
 
+/* ── Row that holds the search input + sort select side by side ── */
+.searchBarRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ── Sort select — sits at the far right of the search row ── */
+.sortSelect {
+    flex-shrink: 0;
+    padding: 12px 16px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 10px;
+    background-color: var(--color-card);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--color-text-mid);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239C8070' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+}
+
+.sortSelect:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(200, 113, 74, 0.12);
+}
+
 /* ── Search bar wrapper (input + icons inside) ── */
 .searchWrapper {
+    flex: 1;
     position: relative;         /* so the icon and clear-btn can be positioned inside */
     width: 100%;
     max-width: 100%;           /* cap width so it doesn't stretch edge-to-edge on wide screens */

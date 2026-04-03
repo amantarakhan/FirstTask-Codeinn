@@ -7,6 +7,8 @@
     <title>Admin Dashboard — Briefly</title>
     <link rel="stylesheet" href="../style/adminDash.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -21,7 +23,7 @@
                     </a>
                 </div>
                 <ul class="navList">
-                    <li><a href="../allBlogsPage/allBlogs.html">All Blogs</a></li>
+                    <li><a href="../adminhome/adminHome.html">All Blogs</a></li>
                     <li><a href="#" class="active">Admin Dashboard</a></li>
                 </ul>
             </nav>
@@ -55,9 +57,7 @@
 
     </div>
 
-    <script>
-        document.getElementById("footerYear").textContent = new Date().getFullYear();
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

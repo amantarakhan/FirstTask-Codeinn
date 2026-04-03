@@ -189,22 +189,62 @@ main {
     margin-top: auto;
 }
 
+/* ACTION ROW — holds approve + reject side by side */
+.cardActionRow {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+
 /* APPROVE BUTTON */
 .approveBtn {
-    margin-top: 12px;
-    padding: 8px 0;
-    background-color: var(--color-primary);
+    flex: 1;
+    padding: 9px 0;
+    background-color: #16A34A;
     color: #fff;
     border: none;
     border-radius: 8px;
+    font-size: 0.78rem;
     font-weight: 700;
-    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .approveBtn:hover {
-    background-color: var(--color-primary-hover);
+    background-color: #15803D;
+    transform: translateY(-1px);
+}
+
+/* REJECT BUTTON */
+.rejectBtn {
+    flex: 1;
+    padding: 9px 0;
+    background-color: transparent;
+    color: #DC2626;
+    border: 1.5px solid #DC2626;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.rejectBtn:hover {
+    background-color: #FEF2F2;
     transform: translateY(-1px);
 }
 

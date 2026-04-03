@@ -1,57 +1,47 @@
-// ── 1. Load saved profile picture from localStorage ──
-const savedPfp = localStorage.getItem("userPFP_" + (localStorage.getItem("userEmail") || ""));
-if (savedPfp) {
-    const navPfp = document.getElementById("navbarPfp");
-    if (navPfp) navPfp.src = savedPfp;
-}
-
-// ── 2. Category → CSS class mapping ──
+// ── 1. Category → CSS class mapping ──
 const CATEGORY_CLASS = {
-    technology: "cat-technology",
-    lifestyle: "cat-lifestyle",
-    travel: "cat-travel",
-    food: "cat-food",
-    business: "cat-business",
-    health: "cat-health",
-    education: "cat-education",
+    technology:    "cat-technology",
+    lifestyle:     "cat-lifestyle",
+    travel:        "cat-travel",
+    food:          "cat-food",
+    business:      "cat-business",
+    health:        "cat-health",
+    education:     "cat-education",
     entertainment: "cat-entertainment",
-    finance: "cat-finance",
-    games: "cat-games",
-    training: "cat-training",
-    other: "cat-other",
+    finance:       "cat-finance",
+    games:         "cat-games",
+    training:      "cat-training",
+    other:         "cat-other",
 };
 
 function getCatClass(category) {
     return CATEGORY_CLASS[(category || "").toLowerCase()] || "cat-default";
 }
 
-// ── 3. Format date ──
+// ── 2. Format date ──
 function formatDate(isoString) {
     if (!isoString) return "";
-    return new Date(isoString).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    const d = new Date(isoString);
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
-// ── 4. Truncate text ──
+// ── 3. Truncate text ──
 function truncate(text, max = 100) {
     if (!text) return "";
     return text.length > max ? text.slice(0, max).trimEnd() + "…" : text;
 }
 
-// ── 5. Navigate to single blog page ──
+// ── 4. Navigate to single blog page ──
 function goToBlog(index) {
     window.location.href = `../singleblogPage/singleBlog.html?id=${index}`;
 }
 
-// ── 6. Image error handler — replaces broken img with placeholder ──
-function onImgError(el) {
-    el.outerHTML = '<div class="storyCardImgPlaceholder">📄</div>';
-}
-
-// ── 7. Build a single story card ──
+// ── 5. Build a single story card ──
 function buildStoryCard(blog, realIndex) {
     const catClass = getCatClass(blog.category);
     const imgHtml = blog.image
-        ? `<img src="${blog.image}" alt="${blog.title}" class="storyCardImg" onerror="onImgError(this)">`
+        ? `<img src="${blog.image}" alt="${blog.title}" class="storyCardImg"
+               onerror="this.outerHTML='<div class=\\'storyCardImgPlaceholder\\'>📄</div>'">`
         : `<div class="storyCardImgPlaceholder">📄</div>`;
 
     return `
@@ -64,15 +54,10 @@ function buildStoryCard(blog, realIndex) {
                 <p class="storyCardDate">${formatDate(blog.createdAt)}</p>
                 <h3 class="storyCardTitle">${blog.title || "Untitled"}</h3>
                 <p class="storyCardExcerpt">${truncate(blog.content, 100)}</p>
+                <span class="storyCardReadMore">Read Feature →</span>
             </div>
         </a>`;
 }
-
-
-// the filter logic start here ----------------------------------------------------------------------------
-// there is 3 filters (search / category / newest and earliest ) all of them are feeding into one central function
-// every one of these filters are calling the applyFiltersAndRender function -> reads the current state of the 3 filters apply them and re-render the grid 
-
 
 // ── 8. All blogs from localStorage (shared state without any filter) ──
 let allBlogs = [];
